@@ -3,7 +3,7 @@
 
 
 ## 데이터베이스 구성
-![ace-project DB](https://user-images.githubusercontent.com/95380638/157873733-e346c1d2-9fd3-49eb-9502-8cb208f53201.png)
+![Untitled Diagram-Page-2](https://user-images.githubusercontent.com/95380638/157875055-21ed9475-a1b2-4bc2-aa50-30f1939ce9cc.png)
 
 
 ## 사이트맵
