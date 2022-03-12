@@ -16,9 +16,9 @@ def index(request):
     return render(request, 'travels/index.html')
 
 
-
-
 # 카카오맵 API 이용해서 지도 보여주기
+
+# 용호
 def map(request):
 
 
@@ -28,8 +28,6 @@ def map(request):
     # 입력된 검색 값으로 API request 하기
     search = request.GET.get('search', '')  # HTTP GET방식으로 요청된 검색창에서 입력한 키워드를 저장
     
-
-
     url = 'https://dapi.kakao.com/v2/local/search/keyword.json?query={}'.format(search)   
     # url이라는 변수를 따로 정의해서 카카오 API URL를 저장 / 이 때 검색할 장소인 query의 값은 위의 search로 대체
     result = requests.get(url, headers={"Authorization" : "KakaoAK 537c71004ec6bb642b90b8bdf96180e5"})
@@ -45,13 +43,6 @@ def map(request):
     }
 
     return render(request, 'travels/map.html', context)
-
-
-
-
-
-# 용호
-
 
 
 
