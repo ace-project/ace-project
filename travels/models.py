@@ -8,10 +8,11 @@ from posts.models import Post
 class Travel(models.Model):
     title = models.CharField(max_length=100)
     location = models.CharField(max_length=50)
-    taste = models.CharField(max_length=100)
+    region = models.CharField(max_length=100)
+    address = models.CharField(max_length=200, null=True, default=1)
     short_content = models.CharField(max_length=50)
     long_content = models.CharField(max_length=100)
-    type = models.CharField(max_length=100)
+    hashtag = models.CharField(max_length=200, default=1)
     image = models.ImageField(upload_to='travels', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     liked_users = models.ManyToManyField(User, related_name='liked_travels')
