@@ -1,18 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
-
 {% block style %}
 <link rel="stylesheet" href="{% static 'travels/map_style.css' %}">
 {% endblock %}
 
-
-
-
 {% block content %}
 <h1>포토스팟 찾기</h1>
-
 
 <!-- 검색창 -->
 <form action="" method="GET">
@@ -23,12 +17,10 @@
 
 </form>
 
-
 <div class="photospot">
 
     <!-- 지도를 담기 위한 영역 만들기 -->
     <div id="map" style="width:500px;height:400px;"></div>
-
 
     {% for spot in spots %}
     <!-- 포토스팟 리스트 -->
@@ -71,7 +63,7 @@
     // 마커를 생성합니다
     var marker = new kakao.maps.Marker({
         position: markerPosition,
-        clickable: true,
+        clickable: false,
     });
     // 마커가 지도 위에 표시되도록 설정합니다
     marker.setMap(map);
@@ -172,6 +164,5 @@
 
     }
 </script>
-
 
 {% endblock %}
