@@ -16,8 +16,6 @@ def index(request):
     return render(request, 'travels/index.html')
 
 
-
-
 # 카카오맵 API 이용해서 지도 보여주기
 
 # 용호
