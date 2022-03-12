@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'travels/travels_style.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1>여행 검색 페이지</h1>
+
+{% for travel in travels %}
+<p>여행 title : {{ travel.title }}</p>
+<p>{{ travel.short_content }}</p>
+<p><img id="travel-image" src="{{ travel.image.url }}" alt="여행 이미지"></p>
+
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'posts/posts_style.css' %}">
+{% endblock %}
+
+
+
+{% block content %}
+<h1>함께하기</h1>
+
+{% for post in posts %}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">제목</th>
+            <th scope="col">지역</th>
+            <th scope="col">작성자</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <th scope="row"></th>
+            <td>{{ post.title }}</td>
+            <td>{{ post.location }}</td>
+            <td>{{ post.user }}</td>
+        </tr>
+    </tbody>
+</table>
+{% endfor %}
+
+{% endblock %}
