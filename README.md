@@ -3,7 +3,8 @@
 
 
 ## 데이터베이스 구성
-![Untitled Diagram-Page-2](https://user-images.githubusercontent.com/95380638/157875055-21ed9475-a1b2-4bc2-aa50-30f1939ce9cc.png)
+![Untitled Diagram-Page-2](https://user-images.githubusercontent.com/95380638/158016517-a66ea04a-97ca-46b2-832c-ad502ed4d7be.png)
+
 
 
 ## 사이트맵
