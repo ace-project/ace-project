@@ -1,0 +1,10 @@
+.wishlist_image {
+    width: 400px;
+    height: 200px;
+}
+
+
+#wishlist_click {
+    text-decoration-line: none;
+    color: black;
+}

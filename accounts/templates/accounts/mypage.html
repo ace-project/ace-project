@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'accounts/mypage_style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div>
+    <h1>마이페이지</h1>
+</div>
+
+<p>아이디 : {{ profile.user }}</p>
+<p>이메일 : {{ profile.email }}</p>
+<p>나이 : {{ profile.age }}</p>
+<p>성별 : {{ profile.gender }}</p>
+<p>프로필 사진 : <img src="{{ profile.image.url }}" alt="프로필 사진"></p>
+
+<hr>
+
+<p>위시리스트</p>
+{% for wishlist in wishlists %}
+<p><a href="{% url 'travels:spot' wishlist.id %}" id="wishlist_click">{{ wishlist.title }}</a></p>
+<img src="{{ wishlist.image.url }}" alt="위시리스트 이미지" class="wishlist_image">
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,62 @@
+/* 포토스팟 card  */
+.card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* 포토스팟 card 이미지 */
+#photospot {
+    width: 300px;
+    height: 400px;
+    overflow: hidden;
+    margin: 10px;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+
+/* 포토스팟 좋아요 버튼 */
+.spotlike_button {
+    background: inherit;
+    border: none;
+    position: absolute;    /* 상위 element을 기준으로 위치를 조정하기 위해 relative 설정 */
+    left: 255px;
+    font-size: 25px;
+}
+
+
+/* 정렬 및 검색 버튼 div */
+.standard {
+    display: flex;
+}
+
+
+
+/* 포토스팟 이름 */
+.photospot_title {
+    color: white;
+    font-size: 25px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    opacity: 0;
+    transform:translate(-50%, -50%);
+    font-weight: 800;
+}
+
+/* 포토스팟 마우스 올릴 때 CSS */
+#photospot_click:hover {
+    opacity: 0.75;
+}
+
+#photospot_click:hover .photospot_title {
+    opacity: 1;
+}
+
+
+
+
+

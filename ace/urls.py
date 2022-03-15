@@ -33,5 +33,8 @@ urlpatterns = [
     # posts로 시작하는 경우, posts 앱의 urls.py로 연결
     path('posts/', include('posts.urls')),
 
+    # accounts로 시작하는 경우, accounts 앱의 urls.py로 연결
+    path('accounts/', include('accounts.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
   # 이미지 serving를 위해 settings에서 설정한 MEDIA_URL로 요청이 들어올 경우, MEDIA_ROOT 내부에서 검색 후 HTTP Response로 응답

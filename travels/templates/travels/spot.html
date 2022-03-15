@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+{% endblock %}
+
+{% block content %}
+<h1>spot 디테일 페이지</h1>
+
+
+<h2>포토스팟 이름 : {{ travel.title }}</h2>
+<h3>지역 : {{ travel.region }}</h3>
+<h3>주소 : {{ travel.address }}</h3>
+<h4>{{ travel.hashtag }}</h4>
+<p>{{ travel.short_content }}</p>
+<img src="{{ travel.image.url }}" alt="spot 디테일 이미지">
+
+
+
+{% endblock %}

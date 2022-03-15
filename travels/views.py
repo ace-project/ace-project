@@ -1,14 +1,14 @@
-from django.shortcuts import render
+from multiprocessing import context
+from django.shortcuts import render, redirect
 from .models import Travel
 from django.db.models import Q  # 모델 filter를 하기 위해 import
 import requests # API HTTP Request 전송을 하기 위해 requests 라이브러리 import
+from django.contrib.auth.decorators import login_required # 로그인된 유저만 접근할 수 있도록 import
 
 # Create your views here.
 
 
 # 상백
-
-#### 수정
 
 
 # 메인페이지
@@ -17,7 +17,85 @@ def index(request):
     return render(request, 'travels/index.html')
 
 
-# 카카오맵 API 이용해서 지도 보여주기
+
+# 둘러보기 페이지
+def spots(request):
+    listtype = request.GET.get('listtype', '')  # listtype이라는 이름으로 GET방식으로 보낸 데이터를 저장
+
+    if listtype == '최신순':
+        travels = Travel.objects.all().order_by('-id')  # Travel 모델 pk 기준 내림차순으로 데이터 정렬하기(최신순)
+    elif listtype == '인기순':
+        travels = Travel.objects.all().order_by('-liked_users')  # Travel 모델 좋아요가 많은순으로 데이터 정렬(인기순)
+    else:
+        travels = Travel.objects.all()  # Travel 모델 데이터 전부 다 travels라는 변수에 저장
+
+
+    locationsearch = request.GET.get('locationsearch', '')  # locationsearch라는 이름으로 GET방식으로 보낸 데이터를 저장
+
+    if locationsearch == '제주전체':                          # 데이터 value에 따라 Travel 모델 필드값을 필터링해서 보여주기
+        travels = Travel.objects.all().filter(location__icontains='jeju')
+    elif locationsearch == '제주시':
+        travels = Travel.objects.all().filter(region__icontains='제주시')
+    elif locationsearch == '서귀포시':
+        travels = Travel.objects.all().filter(region__icontains='서귀포시')
+    elif locationsearch == '애월읍':
+        travels = Travel.objects.all().filter(region__icontains='애월읍')   
+
+
+    q = request.GET.get('query', '')  # 검색창에서 검색한 값은 query라는 이름으로 정했고 GET방식으로 보낸 데이터를 저장
+
+    if q:
+        travels = Travel.objects.all().filter(title__icontains=q)  # 포토스팟 제목에 해당 데이터가 들어있으면 보여주기   
+
+
+
+    context = {
+        'listtype': listtype,
+        'locationsearch': locationsearch,
+        'q': q,
+        'travels': travels,
+    }
+
+    return render(request, 'travels/spots.html', context)
+
+
+
+# 포토스팟 좋아요 기능
+@login_required
+def spotlike(request, travel_id):
+    if request.method == 'POST':
+        try:
+            travel = Travel.objects.get(id=travel_id)
+
+            if request.user in travel.liked_users.all():
+                travel.liked_users.remove(request.user)
+            else:
+                travel.liked_users.add(request.user)
+            return redirect('travels:spots')
+        except Travel.DoesNotExist:
+            pass        
+
+    return redirect('travels:spots')
+
+
+
+
+# 포토스팟 디테일 페이지
+def spot(request, travel_id):
+
+    travel = Travel.objects.get(id=travel_id)   # 해당 travel_id 데이터를 조회해서 travel이라는 변수에 저장
+
+    context = {
+        'travel': travel,
+    }
+
+    return render(request, 'travels/spot.html', context)
+
+
+
+
+
+
 
 # 용호
 def map(request):
