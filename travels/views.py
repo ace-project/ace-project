@@ -13,6 +13,9 @@ from django.utils import timezone
 # 상백
 
 
+
+##### github 수정
+
 # 메인페이지
 def index(request):
 
