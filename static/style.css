@@ -1,9 +1,108 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'KoPubWorldDotum';
+    box-sizing: border-box;
+    font-weight: 500;
+}
+
+:root {
+    --main-color1: #FC6067;
+    --main-color2: #68B1FC;
+    --main-color3: #404040;
+    --shade1: #7F7F7F;
+    --shade2: #BFBFBF;
+    --shade3: #F2F2F2;
+}
+
+
+.nav-all{
+    height: 75px;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--main-color3);
+    color: white;
+    font-size: 14px;
+}
+
+
+.nav-logo{
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:right; 
+    margin-left: 20px;
+}
+
+#logo{
+    height: 60px;
+    object-fit: contain;
+}
+
+.navbar-brand{
+    text-decoration-line: none;
+    text-decoration: none;
+    color: white;    
+}
+
+.nav-menu{
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu-box{
+    text-decoration-line: none;
+    text-decoration: none;
+    color: white;    
+    width: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items:center;   
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+
+.menu-box:hover{
+    color: var(--main-color1); 
+}
+
+i{
+    font-size: 20px;
+    padding-bottom: 5px;
+}
+
+
+.nav-login{
+    width: 200px;
+    height: 75px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    margin-right: 20px;
+}
+
 #logout_button {
     background: none;
     border: none;
-    padding-top: 8px;
+    color: white;
 }
 
+.nav-login-box{
+    display: flex;
+
+}
+.link{
+    text-decoration-line: none;
+    text-decoration: none;
+    color: white;    
+}
 
 #login_content {
     margin-top: 7px;

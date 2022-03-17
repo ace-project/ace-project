@@ -24,9 +24,9 @@
             <form method="POST" action="{% url 'travels:spotlike' travel.id %}">
                 {% csrf_token %}
                 {% if user in travel.liked_users.all %}
-                <button type="submit" id="like_heart"><i class="fa-solid fa-heart" style="color:red;"> <span style="color: black;"> {{ travel.liked_users.count }}</span></i></button>
+                <button type="submit" id="like_heart"><i class="fa-solid fas fa-heart" style="color:red;"> <span style="color: black;"> {{ travel.liked_users.count }}</span></i></button>
                 {% else %}
-                <button type="submit" id="like_heart"><i class="fa-regular fa-heart"> <span style="color: black;"> {{ travel.liked_users.count }}</span></i></button>
+                <button type="submit" id="like_heart"><i class="fa-regular far fa-heart"> <span style="color: black;"> {{ travel.liked_users.count }}</span></i></button>
                 {% endif %}
             </form>
             
