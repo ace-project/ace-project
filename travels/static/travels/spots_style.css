@@ -22,7 +22,7 @@
 .spotlike_button {
     background: inherit;
     border: none;
-    position: absolute;    /* 상위 element을 기준으로 위치를 조정하기 위해 relative 설정 */
+    position: absolute;    /* 상위 element을 기준으로 위치를 조정하기 위해 상위 element를 relative / 해당 버튼은 absolute 설정 */
     left: 255px;
     font-size: 25px;
 }

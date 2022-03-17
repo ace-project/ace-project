@@ -1,9 +1,11 @@
 from multiprocessing import context
 from django.shortcuts import render, redirect
-from .models import Travel
+from .models import Travel, Comment
 from django.db.models import Q  # 모델 filter를 하기 위해 import
 import requests # API HTTP Request 전송을 하기 위해 requests 라이브러리 import
 from django.contrib.auth.decorators import login_required # 로그인된 유저만 접근할 수 있도록 import
+from accounts.models import Profile
+from django.utils import timezone
 
 # Create your views here.
 
@@ -84,15 +86,43 @@ def spotlike(request, travel_id):
 def spot(request, travel_id):
 
     travel = Travel.objects.get(id=travel_id)   # 해당 travel_id 데이터를 조회해서 travel이라는 변수에 저장
+    
+    user = request.user
+
+    # 지도 API 기능
+    search = travel.address
+    url = 'https://dapi.kakao.com/v2/local/search/address.json?query={}'.format(search)
+    result = requests.get(url, headers={"Authorization" : "KakaoAK 537c71004ec6bb642b90b8bdf96180e5"})
+    result_dictionary = result.json()
+    documents = result_dictionary.get('documents')
+
 
     context = {
+        'search': search,
         'travel': travel,
+        'documents': documents,
+        'user': user,
     }
 
     return render(request, 'travels/spot.html', context)
 
 
+# 포토스팟 디테일 페이지 댓글 생성
+def comment(request, travel_id):
+    if request.method == 'POST':
+        author = request.user
+        comment_profile = Profile.objects.get(user=author)
 
+        content = request.POST.get('content')
+
+        travel = Travel.objects.get(id=travel_id)
+
+        if not content:
+            return redirect('travels:spot', travel_id=travel.id)
+        
+        Comment.objects.create(author=comment_profile, content=content, created_at=timezone.now(), travel=travel)
+
+    return redirect('travels:spot', travel_id=travel.id)
 
 
 

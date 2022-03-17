@@ -1,0 +1,101 @@
+#photospot {
+    position: relative;
+}
+
+
+/* 포토스팟 디테일 row */
+#photospot_detail {
+    height: 400px;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* 포토스팟 디테일 사진 frame */
+#photospot_frame {
+    width: 30%;
+    height: 100%;
+    overflow: hidden;
+    padding: 0px;
+}
+
+
+/* 포토스팟 디테일 사진 */
+#photospot_image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 포토스팟 기본정보 */
+#photospot_info {
+    background-color: #F3F0F0;
+}
+
+#photospot_info > p {
+    font-size: 18px;
+}
+
+
+
+/* 디테일 좋아요 버튼 */
+#like_heart {
+    font-size: 25px;
+    position: absolute;   /* 상위 element을 기준으로 위치를 조정하기 위해 상위 element를 relative / 해당 버튼은 absolute 설정 */
+    left: 1110px;
+    top: 360px;
+    border: none;
+}
+
+
+/* 게시판 연결 링크 */
+#board_connect {
+    color: #AAA7A7;
+}
+
+#board_connect:hover {
+    color: black;
+}
+
+
+/* 포토스팟 설명 및 지도 보여주기 */
+#photospot_text {
+    display: flex;
+    justify-content: center;
+    height: 800px;
+}
+
+.photospot_information {
+    font-size: 20px;
+    text-align: center;
+}
+
+
+
+/* 포토스팟 댓글 */
+#photospot_comment {
+    width: 100%;
+    height: 85%;
+    display: flex;
+    justify-content: center;
+}
+
+
+#comment-frame {
+    width: 81.5%;
+    background-color: #F3F1F1;
+    margin-bottom: 60px;
+}
+
+
+/* 댓글 버튼 */
+#comment_button {
+    background: none;
+    border: 1px solid #E0DDDD;
+    border-radius: 5px;
+}
+
+#comment_button:hover {
+    opacity: 0.5;
+}

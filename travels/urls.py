@@ -16,6 +16,9 @@ urlpatterns = [
 
     # 포토스팟 1개 좋아요 URL
     path('spots/<int:travel_id>/like/', views.spotlike, name='spotlike'),
+
+    # 포토스팟 1개 댓글 생성 URL
+    path('spots/<int:travel_id>/comment/', views.comment, name='comment'),
 ]
 
 

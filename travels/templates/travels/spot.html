@@ -2,18 +2,123 @@
 {% load static %}
 
 {% block style %}
+    <link rel="stylesheet" href="{% static 'travels/spot_style.css' %}">
 {% endblock %}
 
 {% block content %}
-<h1>spot 디테일 페이지</h1>
+<div class="container" id="photospot">
+    <div class="row" id="photospot_detail">
+        <!-- 포토스팟 이미지 -->
+        <div class="col-lg-3" id="photospot_frame">
+            <img src="{{ travel.image.url }}" alt="spot 디테일 이미지" id="photospot_image">
+        </div>
+        <!-- 포토스팟 기본 정보 -->
+        <div class="col-lg-6" id="photospot_info">
+            <h1 style="margin-top: 40px;">{{ travel.title }}</h1>
+            <p style="margin-top: 40px;">지역 | {{ travel.region }}</p>
+            <p>주소 | {{ travel.address }}</p>
+            <p>{{ travel.short_content }}</p>
+            <p>{{ travel.hashtag }}</p>
+            
+            <!-- 좋아요 버튼 및 표시 -->
+            <form method="POST" action="{% url 'travels:spotlike' travel.id %}">
+                {% csrf_token %}
+                {% if user in travel.liked_users.all %}
+                <button type="submit" id="like_heart"><i class="fa-solid fa-heart" style="color:red;"> <span style="color: black;"> {{ travel.liked_users.count }}</span></i></button>
+                {% else %}
+                <button type="submit" id="like_heart"><i class="fa-regular fa-heart"> <span style="color: black;"> {{ travel.liked_users.count }}</span></i></button>
+                {% endif %}
+            </form>
+            
+            <a href="{% url 'posts:index' %}" style="text-decoration: none;" id="board_connect">{{ travel.title }}, 함께갈 사람들을 찾아보세요!</a>
+        </div>
+    </div>
+
+    <!-- 포토스팟 설명 및 지도 보여주기 -->
+    <div class="row" id="photospot_text">
+
+        <!-- 포토스팟 설명 -->
+        <div class="col-lg-10" style="margin-top: 70px; margin-bottom: 70px;">
+            <p class="photospot_information">"{{ travel.long_content }}"</p>
+        </div>
+
+        <!-- 포토스팟 지도로 위치 보여주기 -->
+        <div id="map" style="width:78%;height:500px; margin-bottom: 50px;"></div>
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7017ebc62c378fa5ebb089d1fd591804&libraries=services,clusterer,drawing"></script>
+        <script>
+            var container = document.getElementById('map');
+            var options = {
+                center: new kakao.maps.LatLng(33.450701, 126.570667),
+                level: 9
+            };
+    
+            var map = new kakao.maps.Map(container, options);
+
+            // 주소-좌표 변환 객체를 생성합니다
+            var geocoder = new kakao.maps.services.Geocoder();
+
+            // 주소로 좌표를 검색합니다
+            geocoder.addressSearch('"제주도" + {{ search }}', function(result, status) {
+
+                // 정상적으로 검색이 완료됐으면 
+                if (status === kakao.maps.services.Status.OK) {
+
+                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                    // 결과값으로 받은 위치를 마커로 표시합니다
+                    var marker = new kakao.maps.Marker({
+                        map: map,
+                        position: coords
+                    });
+
+                    // 인포윈도우로 장소에 대한 설명을 표시합니다
+
+                    // django template language를 javascript 안에서 사용하려면 이렇게 '' 작은따옴표를 사용해보자
+                    '{% for document in documents %}' 
+                    var infowindow = new kakao.maps.InfoWindow({
+                        content: '<div style="width:320px;text-align:center;padding:10px 0;">{{ document.address_name }}</div>'
+                    });
+                    infowindow.open(map, marker);
+                    '{% endfor %}'
+                    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                    map.setCenter(coords);
+                } 
+            });    
+        </script>
+    </div>
+</div>
 
 
-<h2>포토스팟 이름 : {{ travel.title }}</h2>
-<h3>지역 : {{ travel.region }}</h3>
-<h3>주소 : {{ travel.address }}</h3>
-<h4>{{ travel.hashtag }}</h4>
-<p>{{ travel.short_content }}</p>
-<img src="{{ travel.image.url }}" alt="spot 디테일 이미지">
+<!-- 댓글 기능 -->
+<div class="container">
+    <div class="row" id="photospot_comment">
+        <div class="col-lg-9" id="comment-frame">
+            <h1>Review</h1>
+
+            <!-- 댓글 생성 -->
+            <form method="POST" action="{% url 'travels:comment' travel.id %}">
+                {% csrf_token %}
+                <textarea name="content" id="" cols="115" rows="5" placeholder="후기를 남겨주세요:)"></textarea>
+                <button type="submit" id="comment_button" style="margin-bottom: 20px;">후기 남기기</button>
+            </form>
+
+            <!-- 댓글 표시 -->
+            {% for comment in travel.travel_comments.all %}
+                <div style="margin-top:20px;">
+                    <p>{{ comment.author }} | <span>{{ comment.created_at }}</span></p>
+                    <p>{{ comment.content }}</p>        
+                
+                <!-- 댓글 삭제 버튼 -->
+                {% if request.user == comment.author %}
+                    <button>삭제</button>
+                {% endif %}
+                </div>
+                
+                <hr>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 
 
 
