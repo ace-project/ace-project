@@ -17,7 +17,8 @@ class Travel(models.Model):
     image_second = models.ImageField(upload_to='travels', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     liked_users = models.ManyToManyField(User, related_name='liked_travels')
-    coordinates = models.CharField(max_length=100, default="33.361365, 126.529669")
+    latitude = models.FloatField(default=0.0)
+    longitude = models.FloatField(default=0.0)
 
     def __str__(self):
         return f'{self.id} {self.title}'
