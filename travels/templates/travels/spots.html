@@ -3,65 +3,90 @@
 
 
 {% block style %}
-    <link rel="stylesheet" href="{% static 'travels/spots_style.css' %}">
+    <link rel="stylesheet" href="{% static 'spots_style.css' %}">
 {% endblock %}
 
 
 {% block content %}
 
 <!-- 정렬 및 필터, 검색 div -->
-<div class="standard">
+<div class="spots-page">
+    <!-- <div class="spots-ads-container">
+        <div class="spots-ads">
 
-    <!-- 정렬기준 버튼 -->
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-          정렬: {{ listtype }}
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <form method="GET" action="">
-                <li><button class="dropdown-item" type="submit" name="listtype" value="최신순">최신순</button></li>
-                <li><button class="dropdown-item" type="submit" name="listtype" value="인기순">인기순</button></li>
-            </form>  
-        </ul>
+        </div>
+    </div> -->
+    <div class="spots-search-container">
+ 
+        <!-- 정렬기준 버튼 -->
+        <div class="dropdowns">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                정렬: {{ listtype }}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <form method="GET" action="">
+                        <li><button class="dropdown-item" type="submit" name="listtype" value="최신순">최신순</button></li>
+                        <li><button class="dropdown-item" type="submit" name="listtype" value="인기순">인기순</button></li>
+                    </form>  
+                </ul>
+            </div>
+
+            <!-- 지역별 검색 버튼 -->
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                지역별 검색: {{ locationsearch }}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <form method="GET" action="">
+                        <li><button class="dropdown-item" type="submit" name="locationsearch" value="제주전체">제주전체</button></li>
+                        <li><button class="dropdown-item" type="submit" name="locationsearch" value="제주시">제주시</button></li>
+                        <li><button class="dropdown-item" type="submit" name="locationsearch" value="서귀포시">서귀포시</button></li>
+                        <li><button class="dropdown-item" type="submit" name="locationsearch" value="애월읍">애월읍</button></li>
+                    </form>  
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 검색창 -->
+        <div >
+            <form class="spots-search-button" method="GET" action="">
+                <input class="form-control" type="search" name="query" placeholder="{{ q }}">
+                <button id="spots-search-b" class="btn btn-secondary" type="submit"><p>검색하기</p></button>
+            </form>
+        </div>
     </div>
-
-    <!-- 지역별 검색 버튼 -->
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-          지역별 검색: {{ locationsearch }}
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <form method="GET" action="">
-                <li><button class="dropdown-item" type="submit" name="locationsearch" value="제주전체">제주전체</button></li>
-                <li><button class="dropdown-item" type="submit" name="locationsearch" value="제주시">제주시</button></li>
-                <li><button class="dropdown-item" type="submit" name="locationsearch" value="서귀포시">서귀포시</button></li>
-                <li><button class="dropdown-item" type="submit" name="locationsearch" value="애월읍">애월읍</button></li>
-            </form>  
-        </ul>
-    </div>
-
-    <!-- 검색창 -->
-    <div>
-        <form method="GET" action="">
-            <input type="search" name="query" placeholder="{{ q }}">
-            <button type="submit">검색하기</button>
-        </form>
-    </div>
-
-</div>
-
-
-  
-
+    
+<div class="spots-container">
 <!-- 포토스팟 card 코드 -->
-<div class="container">
+    <div class="spots-container-pics">
+        {% for travel in travels %}
+            <a href="{% url 'travels:spot' travel.id %}" style="text-decoration:none;">
+                <div class="spots-box"> 
+                    <!-- 좋아요 버튼 코드 -->
+                    <form method="POST" action="{% url 'travels:spotlike' travel.id %}">
+                        {% csrf_token %}
+                        {% if user in travel.liked_users.all %}    
+                            <button class="spotlike_button" type="submit"><i id="spotlike1" class="fas fa-heart"></i></button>
+                        {% else %}    
+                            <button class="spotlike_button" type="submit"><i id="spotlike2" class="fas fa-heart"></i></button>
+                        {% endif %}    
+                    </form>
+                    <div class="spots-title"><p>#{{ travel.title }}</div>
+                    <img class="spots-image" src="{{ travel.image.url }}">
+                </div>
+            </a>
+        {% endfor %}   
+    </div>
+</div>
+</div>
+<!-- <div class="container">
     <div class="row">
     {% for travel in travels %}
         <a class="col-lg-3" id="photospot_click" href="{% url 'travels:spot' travel.id %}" style="text-decoration:none;">
 
             <div class="col-lg-3" id="photospot" style="background-image: url('{{ travel.image.url }}');">
                 
-                <!-- 좋아요 버튼 코드 -->
                 <form method="POST" action="{% url 'travels:spotlike' travel.id %}">
                 {% csrf_token %}
                     {% if user in travel.liked_users.all %}    
@@ -71,7 +96,6 @@
                     {% endif %}    
                 </form>    
 
-                <!-- 포토스팟 이름 띄우기 -->
                 <p class="photospot_title">#{{ travel.title }}</p>   
 
             </div>
@@ -80,7 +104,7 @@
 
     {% endfor %}    
     </div>
-</div>
+</div> -->
 
 {% endblock %}
 

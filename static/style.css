@@ -13,17 +13,21 @@
     --shade1: #7F7F7F;
     --shade2: #BFBFBF;
     --shade3: #F2F2F2;
+    --shade4: #f7f7f7;
 }
 
 
 .nav-all{
     height: 75px;
-    width: 100vw;
+    width: auto;
     display: flex;
     justify-content: space-between;
     background-color: var(--main-color3);
     color: white;
     font-size: 14px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 
@@ -56,7 +60,7 @@
 .menu-box{
     text-decoration-line: none;
     text-decoration: none;
-    color: white;    
+    color:   white;  
     width: 70px;
     display: flex;
     flex-direction: column;
@@ -67,10 +71,11 @@
     margin-bottom: 5px;
 }
 
-
 .menu-box:hover{
-    color: var(--main-color1); 
+    color: var(--shade2);   
 }
+
+
 
 i{
     font-size: 20px;
@@ -94,6 +99,12 @@ i{
     color: white;
 }
 
+#logout_button:hover {
+    background: none;
+    border: none;
+    color: #BFBFBF;
+}
+
 .nav-login-box{
     display: flex;
 
@@ -102,6 +113,10 @@ i{
     text-decoration-line: none;
     text-decoration: none;
     color: white;    
+}
+
+.link:hover{
+    color: #BFBFBF;
 }
 
 #login_content {
