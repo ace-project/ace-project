@@ -68,6 +68,7 @@ def spots(request):
 # 포토스팟 좋아요 기능
 @login_required
 def spotlike(request, travel_id):
+    
     if request.method == 'POST':
         try:
             travel = Travel.objects.get(id=travel_id)
@@ -76,11 +77,28 @@ def spotlike(request, travel_id):
                 travel.liked_users.remove(request.user)
             else:
                 travel.liked_users.add(request.user)
+
+
             return redirect('travels:spots')
         except Travel.DoesNotExist:
             pass        
 
-    return redirect('travels:spots')
+    elif request.method == 'GET':
+        try:
+            travel = Travel.objects.get(id=travel_id)
+
+            if request.user in travel.liked_users.all():
+                travel.liked_users.remove(request.user)
+            else:
+                travel.liked_users.add(request.user)
+
+
+            return redirect('travels:spot', travel_id=travel.id)
+        except Travel.DoesNotExist:
+            pass        
+
+        
+    redirect('travels:spots')
 
 
 
@@ -90,7 +108,6 @@ def spot(request, travel_id):
 
     travel = Travel.objects.get(id=travel_id)   # 해당 travel_id 데이터를 조회해서 travel이라는 변수에 저장
     
-
 
     # 지도 API 기능
     search = travel.address

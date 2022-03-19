@@ -20,7 +20,7 @@ class Travel(models.Model):
     coordinates = models.CharField(max_length=100, default="33.361365, 126.529669")
 
     def __str__(self):
-        return f'{self.title}'
+        return f'{self.id} {self.title}'
 
 
 class Comment(models.Model):

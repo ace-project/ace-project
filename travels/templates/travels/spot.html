@@ -21,8 +21,8 @@
             <p>{{ travel.hashtag }}</p>
             
             <!-- 좋아요 버튼 및 표시 -->
-            <form method="POST" action="{% url 'travels:spotlike' travel.id %}">
-                {% csrf_token %}
+            <form method="GET" action="{% url 'travels:spotlike' travel.id %}">
+                
                 {% if user in travel.liked_users.all %}
                 <button type="submit" id="like_heart"><i class="fa-solid fas fa-heart" style="color:red;"> <span style="color: black;"> {{ travel.liked_users.count }}</span></i></button>
                 {% else %}
@@ -56,7 +56,7 @@
 
 
 
-            var imageSrc = "/static/camera2.png", // 마커이미지의 주소입니다    
+            var imageSrc = "/static/location.png", // 마커이미지의 주소입니다    
                 imageSize = new kakao.maps.Size(50, 50), // 마커이미지의 크기입니다
                 imageOption = {offset: new kakao.maps.Point(27, 30)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
@@ -122,7 +122,7 @@
                     <p>{{ comment.content }}</p>        
                 
                 <!-- 댓글 삭제 버튼 -->
-                {% if request.user.username == comment.author %}
+                {% if user == comment.author %}
                     <button>삭제</button>
                 {% endif %}
                 </div>
