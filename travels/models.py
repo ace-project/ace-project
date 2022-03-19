@@ -14,8 +14,10 @@ class Travel(models.Model):
     long_content = models.CharField(max_length=100)
     hashtag = models.CharField(max_length=200, default=1)
     image = models.ImageField(upload_to='travels', null=True)
+    image_second = models.ImageField(upload_to='travels', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     liked_users = models.ManyToManyField(User, related_name='liked_travels')
+    coordinates = models.CharField(max_length=100, default="33.361365, 126.529669")
 
     def __str__(self):
         return f'{self.title}'

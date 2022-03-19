@@ -90,7 +90,7 @@ def spot(request, travel_id):
 
     travel = Travel.objects.get(id=travel_id)   # 해당 travel_id 데이터를 조회해서 travel이라는 변수에 저장
     
-    user = request.user
+
 
     # 지도 API 기능
     search = travel.address
@@ -104,7 +104,6 @@ def spot(request, travel_id):
         'search': search,
         'travel': travel,
         'documents': documents,
-        'user': user,
     }
 
     return render(request, 'travels/spot.html', context)
