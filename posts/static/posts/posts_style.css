@@ -7,3 +7,48 @@
 h1 {
     color: gray;
 }
+
+
+/* 게시판 전체 */
+.container {
+    margin-top: 40px;
+ }
+  
+  
+ /* 글쓰기 및 검색창  */
+ #posts_header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+ }
+  
+  
+ /* 검색창 form */
+ .spots-search-button {
+    display: flex;
+    flex-direction: row;
+    height: 37.97px;
+    width: 400px;
+ }
+  
+  
+ /* 검색창 input */
+ #spots-search-b {
+    width: 100px;
+    margin-left: 3px;
+ }
+  
+  
+  
+ /* 디테일 페이지 a element */
+ #post_detail_a {
+    text-decoration: none;
+    color: black;
+ }
+  
+  
+ #post_detail_a:hover {
+    color: gray;
+ }
+ 
