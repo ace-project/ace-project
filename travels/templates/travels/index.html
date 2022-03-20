@@ -14,27 +14,29 @@
 {% block content %}
 
 <div class="index-page">
-    <div class="index-first-page">
-        <div class="index-text1"><a href="{% url 'posts:index' %}" style="text-decoration-line: none"><div class="index-text">여기선 대충 찍어도 <span style="color:#FC6067">인생샷</span>,</div></a></div>
-        <!--캐러셀 만들기 -->
-        <div class="post-slider">       
-            <i class="fas fa-caret-left prev"></i>
-            <i class="fas fa-caret-right next"></i>  
-            <div class="post-wrapper">
-                {% for spot in spots %}
-                    <div class="post">
-                        <a href="{% url 'travels:spot' spot.id %}" style="text-decoration:none;">
-                            <div class="index-spots-title">
-                                <p><i class="fas fa-heart" style="color:#FC6067"></i>
-                                    <br>{{ spot.liked_users.count }}</p></div>
-                            <img class="index-spots-image" src="{{ spot.image.url }}" style="box-shadow:5px 5px 10px rgba(0, 0, 0, 0.4);">
-                        </a>
-                    </div>
-                {% endfor %}
+    <div class="index-page-inner">
+        <div class="index-first-page">
+            <div class="index-text1"><a href="{% url 'posts:index' %}" style="text-decoration-line: none"><div class="index-text">여기선 대충 찍어도 <span style="color:#FC6067">인생샷</span>,</div></a></div>
+            <!--캐러셀 만들기 -->
+            <div class="post-slider">       
+                <i class="fas fa-caret-left prev"></i>
+                <i class="fas fa-caret-right next"></i>  
+                <div class="post-wrapper">
+                    {% for spot in spots %}
+                        <div class="post">
+                            <a href="{% url 'travels:spot' spot.id %}" style="text-decoration:none;">
+                                <div class="index-spots-title">
+                                    <p><i class="fas fa-heart" style="color:#FC6067"></i>
+                                        <br>{{ spot.liked_users.count }}</p></div>
+                                <img class="index-spots-image" src="{{ spot.image.url }}" style="box-shadow:5px 5px 10px rgba(0, 0, 0, 0.4);">
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
+            <!--post slider-->
+            <div class="index-text2"><a href="{% url 'posts:index' %}" style="text-decoration-line: none"><div class="index-text">영혼 담아 찍어 줄 <span >동행</span>과 함께</div></a></div>
         </div>
-        <!--post slider-->
-        <div class="index-text2"><a href="{% url 'posts:index' %}" style="text-decoration-line: none"><div class="index-text">영혼 담아 찍어 줄 <span >동행</span>과 함께</div></a></div>
     </div>
 </div>
 
