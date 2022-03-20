@@ -1,0 +1,49 @@
+/* 글 작성 div */
+#edit_container {
+    margin-top: 40px;
+    margin-left: 60px;
+}
+
+
+#edit_title {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+/* 글 수정 contianer */
+.edit_container {
+    width: 90%;
+    height: 90%;
+}
+
+
+/* 글 수정 버튼 */
+#edit_submit {
+    background-color: #EBEBEB;
+    border: none;
+    border-radius: 20%;
+    float: right;
+    margin-bottom: 20px;
+    font-size: 15px;
+    padding: 13px;
+}
+
+
+
+/* 포토스팟 선택 버튼 */
+#select_photospot {
+    background-color: #EBEBEB;
+    margin-left: 1050px;
+    border: none;
+    border-radius: 5%;
+    font-size: 15px;
+    padding: 11px;
+    width: 150px;
+}
+
+
+
+#select_photospot option[value=""][disabled] {
+    display: none;
+}

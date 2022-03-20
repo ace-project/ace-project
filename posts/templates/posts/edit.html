@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'posts/edit_style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="col-lg-12 col-md-12 col-sm-12" id="edit_container">
+    <h1 id="edit_title">글 수정하기</h1>
+
+    <!-- 글 수정 div -->
+    <div class="edit_container"> 
+        <form method="POST" action="{% url 'posts:edit' post.id %}">
+            {% csrf_token %}
+
+            <!-- 지역 선택 및 등록 버튼 -->
+            <div>
+                <select id="select_photospot" name="photospot" required>
+                    <option value="" disabled selected>{{ post.location }}</option>
+                    {% for travel in travels %}
+                    <option value="{{ travel.title }}">{{ travel.title }}</option>
+                    {% endfor %}
+                </select>
+            
+                <button id="edit_submit" type="submit">수정</button>
+            </div>
+
+            <!-- 글 수정 정보 받기 -->
+            <div class="mb-4">
+                <input type="text" class="form-control" id="title" name="title" value="{{ post.title }}">
+            </div>
+            <div class="mb-3">
+                <textarea class="form-control" id="body" rows="5" name="body">{{ post.body }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="due">기한 설정하기</label>
+                <input type="date" class="form-control" id="due" name="due" style="margin-top: 10px;">
+            </div>
+
+        </form>
+    </div>    
+</div>
+{% endblock %}

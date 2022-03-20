@@ -15,12 +15,12 @@
 <div class="container">
    <div class="col-lg-12 col-md-12" id="posts_header">
        <!-- 글쓰기 버튼 -->
-       <button type="button" class="btn btn-secondary">글쓰기</button>
+       <button type="button" class="btn" onclick=location.href="{% url 'posts:create' %}" style="background-color: #EBEBEB;">글쓰기</button>
        <!-- 검색창 -->
        <div>
            <form class="spots-search-button" method="GET" action="">
                <input class="form-control" type="search" name="query" placeholder="{{ q }}">
-               <button id="spots-search-b" class="btn btn-secondary" type="submit"><p>검색하기</p></button>
+               <button id="spots-search-b" class="btn" type="submit" style="background-color: #EBEBEB;"><p>검색하기</p></button>
            </form>
        </div>
    </div>
@@ -40,7 +40,7 @@
        <tbody>
         {% for post in posts %}
            <tr>   
-               <th scope="row"></th>
+               <td></td>
                <td><a id="post_detail_a" href="{% url 'posts:detail' post.id %}">{{ post.title }} 
                 {% if post.post_comments %}   
                     ({{ post.post_comments.count }})
@@ -50,8 +50,8 @@
                 </a></td>
                <td>{{ post.location }}</td>
                <td>{{ post.user }}</td>
-               <td>{{ post.due|date:'Y-m-d' }}</td>
-           </tr>
+               <td>{{ post.due|date:'Y-m-d' }}</td>  
+           </tr> 
         {% endfor %}   
        </tbody>
    </table>

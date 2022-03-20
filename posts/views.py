@@ -1,9 +1,10 @@
 from multiprocessing import context
 from django.shortcuts import render, redirect
 from .models import Post
-from travels.models import Comment
+from travels.models import Comment, Travel
 from accounts.models import Profile
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -13,11 +14,20 @@ from django.utils import timezone
 # 게시판 리스트
 def index(request):
  
-   posts = Post.objects.all()    # Post 모델 데이터 전부를 조회해서 posts 변수에 저장
+   posts = Post.objects.all().order_by('-id')    # Post 모델 데이터 전부를 조회해서 posts 변수에 저장
    
- 
+   # 게시판 개수 출력
+   number = len(posts)
+
+#    count = 0
+#    for count in range(number):
+#        count += 1
+#        print(count)
+    
+
    context = {
        'posts': posts,
+       'number': number,
    }
   
    return render(request, 'posts/posts.html', context)
@@ -38,6 +48,7 @@ def detail(request, post_id):
  
  
 # 게시판 디테일 페이지 댓글
+@login_required
 def comment(request, post_id):
    if request.method == 'POST':
        user = request.user
@@ -50,6 +61,71 @@ def comment(request, post_id):
        comment.save()
  
        return redirect('posts:detail', post_id=post.id)
+
+
+# 게시판 글 생성하기
+@login_required
+def create(request):
+    travels = Travel.objects.all()
+
+    if request.method == 'POST':
+        user = request.user
+        user = Profile.objects.get(user=user)
+        title = request.POST.get('title')
+        body = request.POST.get('body')
+        due = request.POST.get('due')
+        location = request.POST.get('photospot')
+
+        post = Post(user=user, title=title, body=body, location=location, due=due)
+        post.save()
+
+        return redirect('posts:index')
+
+    context = {
+        'travels': travels,
+    }
+
+    return render(request, 'posts/create.html', context)
+
+
+# 게시판 글 수정하기
+@login_required
+def edit(request, post_id):
+
+    try:
+        post = Post.objects.get(id=post_id, user=request.user.profile)   # 본인일 경우에만 수정할 수 있도록 설정
+        travels = Travel.objects.all()
+    except Post.DoesNotExist:
+        return redirect('posts:index')
+
+    if request.method == 'POST':
+        post.title = request.POST.get('title')
+        post.body = request.POST.get('body')
+        post.due = request.POST.get('due')
+        post.location = request.POST.get('photospot')
+        post.save()
+
+        return redirect('posts:detail', post_id=post.id)
+
+    context = {
+        'post': post,
+        'travels': travels,
+    }
+
+    return render(request, 'posts/edit.html', context)
+
+
+# 게시판 글 삭제하기
+@login_required
+def delete(request, post_id):
+
+    try:
+        post = Post.objects.get(id=post_id, user=request.user.profile)
+        post.delete()
+    except Post.DoesNotExist:
+        return redirect('posts:index')     
+
+    return redirect('posts:index')
 
 
 # 용호

@@ -38,7 +38,12 @@ h1 {
     width: 100px;
     margin-left: 3px;
  }
-  
+
+ 
+ /* 게시판 title */
+ .posts_title {
+    font-weight: 700;
+ }
   
   
  /* 디테일 페이지 a element */

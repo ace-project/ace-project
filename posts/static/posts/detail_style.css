@@ -16,6 +16,12 @@
  #detail_due {
     font-size: 18px;
  }
+
+
+ /* 게시판 포토스팟 */
+ #detail_photospot {
+    font-size: 18px;
+ }
   
   
   
@@ -33,6 +39,7 @@
  /* 유저 정보 div */
  .user_info_container {
     margin-top: 20px;
+    width: 90%;
  }
   
   
@@ -40,24 +47,24 @@
  .user_info {
     display: flex;
     flex-direction: row;
-    justify-content: left;
+    justify-content: space-between;
     list-style: none;
     padding-left: 0px;
  }
   
   
  .user_info_li_2 {
-    margin-left: 1100px;
+    margin-left: 1000px;
  }
   
   
  /* 댓글창 */
  #comment_info {
     margin-top: 50px;
-    width: 1320px;
+    width: 92%;
     height: 300px;
     margin-left: 45px;
-    margin-right: 45px;
+    margin-right: 40px;
  }
   
  .comment_form {
@@ -69,4 +76,10 @@
  .post_comment {
     padding-top: 20px;
  }
- 
+
+
+
+ /* 글 수정 버튼 */
+ #edit_button {
+    background-color: #EBEBEB;
+ }
