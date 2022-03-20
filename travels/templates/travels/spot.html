@@ -2,48 +2,71 @@
 {% load static %}
 
 {% block style %}
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" href="{% static 'travels/spot_style.css' %}">
+    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+    <style>.slick-sample{width: 100%;height: 200px;} .slick-sample .slick-list{height: 100%;} </style>
 {% endblock %}
 
+
 {% block content %}
-<div class="container" id="photospot">
-    <div class="row" id="photospot_detail">
-        <!-- 포토스팟 이미지 -->
-        <div class="col-lg-3" id="photospot_frame">
-            <img src="{{ travel.image.url }}" alt="spot 디테일 이미지" id="photospot_image">
+<div class="spot-page">
+    <div class="spot-inner-page">
+        <div class="spot-container1">
+            <div class="spot-pics">
+                <div class="post-slider">       
+                    <i class="fas fa-caret-left prev"></i>
+                    <i class="fas fa-caret-right next"></i>  
+                    <div class="post-wrapper">
+                            <div class="post">
+                                <img class="index-spots-image" src="{{ travel.image.url }}">
+                            </div>
+                            <div class="post">
+                                <img class="index-spots-image" src="{{ travel.image_second.url }}">
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="spot-container1-1">
+                <div class="spot-info">
+                    <div id="spot-title">{{ travel.title }}</div>
+                    <div class="spot-info-text"><span class="spot-category">지역 |</span> {{ travel.region }}</div>
+                    <div class="spot-info-text"><span class="spot-category">주소 |</span> {{ travel.address }}</div>
+                    <div class="spot-info-text"></br></div>
+                    <div id="short-text" class="spot-info-text">"{{ travel.short_content }}"</div>
+                    <div id="hashtag-text" class="spot-info-text">{{ travel.hashtag }}</div>
+
+                </div>
+
+
+                <div class="spot-like">
+                    <a href="{% url 'posts:index' %}" style="text-decoration: none;" id="board_connect">{{ travel.title }}, 함께갈 사람들을 찾아보세요!</a>
+                    <div class="spot-counts">
+                        <div class="spot-count">
+                            <i id="spot-comment" class="fas fa-comment-dots"></i><span id="short-text-count">{{ travel.travel_comments.count }}</span>
+                        </div>
+                        <div class="spot-count">
+                            <form method="GET" action="{% url 'travels:spotlike' travel.id %}">
+                                {% if user in travel.liked_users.all %}
+                                <button type="submit" id="like_heart"><i id="spotlike1" class="fas fa-heart"> <span id="short-text-count" > {{ travel.liked_users.count }}</span></i></button>
+                                {% else %}
+                                <button type="submit" id="like_heart"><i id="spotlike2" class="fas fa-heart"> <span id="short-text-count"> {{ travel.liked_users.count }}</span></i></button>
+                                {% endif %}
+                            </form>  
+                        </div>
+                    </div>
+                </div>    
+
+            </div>    
         </div>
-        <!-- 포토스팟 기본 정보 -->
-        <div class="col-lg-6" id="photospot_info">
-            <h1 style="margin-top: 40px;">{{ travel.title }}</h1>
-            <p style="margin-top: 40px;">지역 | {{ travel.region }}</p>
-            <p>주소 | {{ travel.address }}</p>
-            <p>{{ travel.short_content }}</p>
-            <p>{{ travel.hashtag }}</p>
+
+        <div class="spot-container2">
+            <p class="photospot_information">{{ travel.long_content }}</p>
             
-            <!-- 좋아요 버튼 및 표시 -->
-            <form method="GET" action="{% url 'travels:spotlike' travel.id %}">
-                
-                {% if user in travel.liked_users.all %}
-                <button type="submit" id="like_heart"><i class="fa-solid fas fa-heart" style="color:red;"> <span style="color: black;"> {{ travel.liked_users.count }}</span></i></button>
-                {% else %}
-                <button type="submit" id="like_heart"><i class="fa-regular far fa-heart"> <span style="color: black;"> {{ travel.liked_users.count }}</span></i></button>
-                {% endif %}
-            </form>
-            
-            <a href="{% url 'posts:index' %}" style="text-decoration: none;" id="board_connect">{{ travel.title }}, 함께갈 사람들을 찾아보세요!</a>
         </div>
-    </div>
-
-    <!-- 포토스팟 설명 및 지도 보여주기 -->
-    <div class="row" id="photospot_text">
-
-        <!-- 포토스팟 설명 -->
-        <div class="col-lg-10" style="margin-top: 70px; margin-bottom: 70px;">
-            <p class="photospot_information">"{{ travel.long_content }}"</p>
-        </div>
-
-        <!-- 포토스팟 지도로 위치 보여주기 -->
-        <div id="map" style="width:78%;height:500px; margin-bottom: 50px;"></div>
+        <div class="spot-container3">
+            <div id="map" style="width:100%;height:500px; margin-bottom: 50px;  border-radius: 5%; "></div>
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7017ebc62c378fa5ebb089d1fd591804&libraries=services,clusterer,drawing"></script>
         <script>
             var container = document.getElementById('map');
@@ -56,7 +79,7 @@
 
 
 
-            var imageSrc = "/static/location.png", // 마커이미지의 주소입니다    
+            var imageSrc = "/static/images/icon1.png", // 마커이미지의 주소입니다    
                 imageSize = new kakao.maps.Size(50, 50), // 마커이미지의 크기입니다
                 imageOption = {offset: new kakao.maps.Point(27, 30)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
@@ -98,40 +121,69 @@
                 } 
             });    
         </script>
-    </div>
-</div>
+        </div>
+        <div class="spot-container4">
+            <!-- 댓글 기능 -->
 
-
-<!-- 댓글 기능 -->
-<div class="container">
     <div class="row" id="photospot_comment">
-        <div class="col-lg-9" id="comment-frame">
-            <h1>Review</h1>
-
+            <div class="spot-review">Review</div>
+            <div>
+                {% for comment in travel.travel_comments.all %}
+                    <div style="margin-top:20px;">
+                        <p>{{ comment.author }} | <span>{{ comment.created_at }}</span></p>
+                        <p>{{ comment.content }}</p>        
+                    
+                    <!-- 댓글 삭제 버튼 -->
+                    {% if user == comment.author %}
+                        <button>삭제</button>
+                    {% endif %}
+                    </div>
+                    
+                    <hr>
+                {% endfor %}
+            </div>
             <!-- 댓글 생성 -->
-            <form method="POST" action="{% url 'travels:comment' travel.id %}">
-                {% csrf_token %}
-                <textarea name="content" id="" cols="115" rows="5" placeholder="후기를 남겨주세요:)"></textarea>
-                <button type="submit" id="comment_button" style="margin-bottom: 20px;">후기 남기기</button>
-            </form>
+            <div  class="mb-3">
+                <form  id="comment-box" method="POST" action="{% url 'travels:comment' travel.id %}">
+                    {% csrf_token %}
+                    <textarea class="form-control" id="comment-area" name="content"  cols="115" rows="5" placeholder="새로운 후기를 남겨주세요:)"></textarea>
+                    <button class="btn btn-secondary" type="submit" id="comment_button" style="margin-bottom: 20px;">후기 남기기</button>
+                </form>
+            </div>
 
-            <!-- 댓글 표시 -->
-            {% for comment in travel.travel_comments.all %}
-                <div style="margin-top:20px;">
-                    <p>{{ comment.author }} | <span>{{ comment.created_at }}</span></p>
-                    <p>{{ comment.content }}</p>        
-                
-                <!-- 댓글 삭제 버튼 -->
-                {% if user == comment.author %}
-                    <button>삭제</button>
-                {% endif %}
-                </div>
-                
-                <hr>
-            {% endfor %}
+        </div>
+    </div>
+
+
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<script> 
+    $('.post-wrapper').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    nextArrow:$('.next'),
+    prevArrow:$('.prev'),
+    dots: true,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    dotsClass : "slick-dots",  
+    });
+</script>
 
 
 

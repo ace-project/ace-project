@@ -1,92 +1,272 @@
-#photospot {
-    position: relative;
+*{
+    
 }
 
-
-/* 포토스팟 디테일 row */
-#photospot_detail {
-    height: 400px;
-    margin-top: 50px;
+.spot-page{
+    background-color: var(--background-color);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position:relative;
+
+}
+
+.spot-inner-page{
+    width: 1188px;  
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+}
+
+/* 컨테이너1: 요약정보 */
+.spot-container1{
+    background-color: #e5e2e2;
+    display: flex;
+    align-items: center;
+    position:relative;
+    margin-top: 5%;
+    height: 400px;
+}
+.spot-info{
+    margin-left: 30px;
+}
+
+#spot-title{
+    font-size: 45px;
+    font-weight: 700;
+    color: var(--main-color2-2);
+    margin-bottom: 20px;
+}
+
+.spot-container1-1{
+    height: 400px;
+    width: 788px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.spot-info{
+    margin-top: 60px;
+
+}
+
+.spot-info-text{
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--main-color2-2);
+    margin-bottom: 8px;
+}
+
+.spot-category{
+    font-weight: 700;
+    color: var(--shade1);
+}
+
+#hashtag-text{
+    color: var(--main-color1);
+    font-weight: 700;
+}
+
+#short-text{
+    font-weight: 500;
+    color: var(--main-color1);
+}
+
+/* 디테일 좋아요 버튼 */
+.spot-like{
+    width: 768px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 15PX;
+}
+
+#spot-comment{
+    font-size: 28px;
+    color: var(--shade1);
+    margin-right: 10px;
+    margin-top: 3px;
+}
+
+#short-text-count{
+    font-weight: 500;
+    font-size: 25px;
+    color: var(--shade1);
+}
+
+.spot-counts{
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    margin-right: 10px;
+
 }
 
 
-/* 포토스팟 디테일 사진 frame */
-#photospot_frame {
-    width: 30%;
-    height: 100%;
-    overflow: hidden;
+.spot-count{
+    display: flex;
+    flex-direction: row;
+    margin-left: 25px;
+
+}
+
+
+#like_heart {
+    font-size: 25px;
+    border: none;
+    background-color: #e5e2e2;
+    margin: 0px;
     padding: 0px;
 }
 
-
-/* 포토스팟 디테일 사진 */
-#photospot_image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* 포토스팟 기본정보 */
-#photospot_info {
-    background-color: #F3F0F0;
-}
-
-#photospot_info > p {
-    font-size: 18px;
-}
-
-
-
-/* 디테일 좋아요 버튼 */
-#like_heart {
+#spotlike1{
     font-size: 25px;
-    position: absolute;   /* 상위 element을 기준으로 위치를 조정하기 위해 상위 element를 relative / 해당 버튼은 absolute 설정 */
-    left: 1110px;
-    top: 360px;
-    border: none;
+    color: var(--main-color1-1);
+}
+
+#spotlike2{
+    font-size: 100px;
+    font-size: 25px;
+    color: white;
+}
+
+
+
+/* 컨테이너2: long -text  */
+.spot-container2{
+    justify-content: flex-end;
+    width: 788px;  
+    padding: 30px;
+    height: auto;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--main-color2-2);
+    /* background-color: #d8d8d8; */
+
+}
+
+/* 컨테이너3: 지도 */
+.spot-container3{
+    width: 788px;  
+    /* background-color: #d8d8d8; */
+
 }
 
 
 /* 게시판 연결 링크 */
 #board_connect {
     color: #AAA7A7;
+    font-size: 18px;
+    padding-left: 30px;
 }
 
 #board_connect:hover {
-    color: black;
+    color: var(--main-color2-2);
 }
 
 
-/* 포토스팟 설명 및 지도 보여주기 */
-#photospot_text {
-    display: flex;
-    justify-content: center;
-    height: 800px;
-}
 
-.photospot_information {
-    font-size: 20px;
+
+/* 캐러샐 만들기 */
+.post-slider{
+    /* width:70%;
+    margin:0px auto; */
+    position:relative;
+  }
+  
+  .post-slider .next{
+    position:absolute;
+    top:185px;
+    right:5px;
+    font-size:30px;
+    color:rgb(255, 255, 255, 0.6);
+    cursor: pointer;
+    z-index: 2;
+  }
+  .post-slider .prev{
+    position:absolute;
+    top:185px;
+    left:5px;
+    font-size:30px;
+    color:rgb(255, 255, 255, 0.6);
+    cursor: pointer;
+    z-index: 2; 
+}
+  .post-slider .post-wrapper{
+  
+    width:400px;
+    height:400px;
+    margin:0px auto;
+    overflow: hidden;
+    /* background-color: rgba(0, 0, 0, 0.08); */
+  
+  }
+  .index-spots-image{
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    /* border-radius: 5%; */
+  }
+  .slick-dots {
     text-align: center;
-}
+    z-index: 2;
+    position:absolute;
+    bottom: 20px;
+    margin: 0px;
+    margin-left: 165px;
+    padding: 0px;
+  }
+  .slick-dots > li {
+    display: inline-block;
+    margin: 12px;
+  }
+  .slick-dots button {
+    z-index: 20;
+    position:absolute;
+    width: 15px;
+    height: 15px;
+    color:rgb(255, 255, 255, 0.6);
+    border-radius: 50%;
+    text-indent: -9999px;
+    padding: 0;
+    border: none;
+  }
+  .slick-dots .slick-active button {
+    background-color: var(--main-color1-1);
+  }
+
+
+
+
+
 
 
 
 /* 포토스팟 댓글 */
+.spot-container4{
+    width: 788px;
+    /* background-color: #e5e2e2; */
+    display: flex;
+    align-items: center;
+
+
+}
+
+
 #photospot_comment {
-    width: 100%;
+    width: 105%;
     height: 85%;
     display: flex;
     justify-content: center;
 }
 
-
-#comment-frame {
-    width: 81.5%;
-    background-color: #F3F1F1;
-    margin-bottom: 60px;
+#comment-area{
+    width:788px
+    
 }
+
 
 
 /* 댓글 버튼 */
@@ -94,8 +274,22 @@
     background: none;
     border: 1px solid #E0DDDD;
     border-radius: 5px;
+    background-color: var(--main-color1);
+    margin-top: 10px;
 }
 
 #comment_button:hover {
     opacity: 0.5;
+}
+
+.spot-review{
+    font-size: 25px;
+    font-weight: 700;
+    color: var(--main-color2-2);
+}
+
+#comment-box{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
