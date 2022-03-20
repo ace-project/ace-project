@@ -6,6 +6,7 @@ import requests # API HTTP Request 전송을 하기 위해 requests 라이브러
 from django.contrib.auth.decorators import login_required # 로그인된 유저만 접근할 수 있도록 import
 from accounts.models import Profile
 from django.utils import timezone
+import random
 
 # Create your views here.
 
@@ -17,9 +18,7 @@ from django.utils import timezone
 ##### github 수정
 
 # 메인페이지
-def index(request):
-
-    return render(request, 'travels/index.html')
+# 아래에 영수 수정
 
 
 
@@ -177,6 +176,17 @@ def map(request):
 
 # 영수
 
+# 메인페이지 
+def index(request):
+    spots = list(Travel.objects.all())
+    spots = random.sample(spots, 6)
+    
+    context = {
+        'spots': spots,
+
+    }
+
+    return render(request, 'travels/index.html', context)
 
 
 

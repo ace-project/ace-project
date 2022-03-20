@@ -1,3 +1,9 @@
+/* nav바에 해당 메뉴 색 변경 */
+#menu3{
+    color: var(--main-color1); 
+}
+
+
 h1 {
     color: gray;
 }
