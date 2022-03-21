@@ -5,6 +5,7 @@ from travels.models import Comment, Travel
 from accounts.models import Profile
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -15,19 +16,18 @@ from django.contrib.auth.decorators import login_required
 def index(request):
  
    posts = Post.objects.all().order_by('-id')    # Post 모델 데이터 전부를 조회해서 posts 변수에 저장
+
+   # 페이지네이터 코드
+   paginator = Paginator(posts, 4)
+   page = request.GET.get('page')
+   posts = paginator.get_page(page)
+
+   page_range = paginator.page_range
+
    
-   # 게시판 개수 출력
-   number = len(posts)
-
-#    count = 0
-#    for count in range(number):
-#        count += 1
-#        print(count)
-    
-
    context = {
        'posts': posts,
-       'number': number,
+       'page_range': page_range,
    }
   
    return render(request, 'posts/posts.html', context)

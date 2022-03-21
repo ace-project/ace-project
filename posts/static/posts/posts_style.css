@@ -9,7 +9,7 @@ h1 {
 }
 
 
-/* 게시판 전체 */
+/* 전체 */
 .container {
     margin-top: 40px;
  }
@@ -39,11 +39,24 @@ h1 {
     margin-left: 3px;
  }
 
+
+/* 게시판 */
+#table_container {
+   width: 100%;
+}
+
  
- /* 게시판 title */
- .posts_title {
+ /* 게시판 윗줄 */
+ .posts_head {
     font-weight: 700;
  }
+
+
+/* 게시판 제목 */
+#posts_title {
+   width: 600px;
+}
+
   
   
  /* 디테일 페이지 a element */
@@ -57,3 +70,15 @@ h1 {
     color: gray;
  }
  
+
+
+ /* paginator div */
+ #paginator_container {
+    display: flex;
+    justify-content: center;   
+    margin-top: 30px;
+ }
+
+
+
+

@@ -14,9 +14,11 @@ def sign_up(request):
     context = {}
 
     if request.method == 'POST':
-        if (request.POST.get('username') and  # 회원가입 시 받은 아이디와 비밀번호가 있는지 확인
-            request.POST.get('password') and  # 그리고 받은 비밀번호와 비밀번호 확인 내용이 일치하는지 확인
+        if (request.POST.get('username') and  # 회원가입 시 받은 아이디와 비밀번호 그리고 이메일이 모두 있는지 확인
+            request.POST.get('password') and  
+            request.POST.get('email') and
             request.POST.get('password') == request.POST.get('password_check')):
+            # 그리고 받은 비밀번호와 비밀번호 확인 내용이 일치하는지 확인
 
             new_user = User.objects.create_user(    # User 모델에 새로운 유저 생성 / 입력된 아이디와 비밀번호로 생성
                 username = request.POST.get('username'),
@@ -27,16 +29,16 @@ def sign_up(request):
 
             user = request.user                  # 로그인된 유저를 user 변수에 저장 / 밑에 코드들도 회원가입 시 받은 데이터를 각 변수에 저장
             email = request.POST.get('email')
-            age = request.POST.get('age')
-            gender = request.POST.get('gender')
-            image = request.FILES.get('image')
-            profile = Profile(user=user, email=email, mbti='none', type='none', age=age, gender=gender, introduce='none', image=image)
+            # age = request.POST.get('age')
+            # gender = request.POST.get('gender')
+            # image = request.FILES.get('image')
+            profile = Profile(user=user, email=email, mbti='none', type='none', age=0, gender='none', introduce='none', image='none')
             profile.save()                       # 각 변수를 Profile 모델 필드에 저장하고 save()
 
             return redirect('index')
 
         else:
-            context['error'] = '아이디와 비밀번호를 다시 입력해주세요!'    
+            context['error'] = '아이디, 비밀번호 그리고 이메일을 다시 입력해주세요!'    
 
 
     return render(request, 'accounts/sign_up.html', context)

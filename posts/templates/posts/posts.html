@@ -26,14 +26,14 @@
    </div>
  
    <!-- 게시판 -->
-   <table class="table">   
+   <table class="table" id="table_container">   
        <thead>
            <tr>
-               <th class="posts_title" scope="col">#</th>
-               <th class="posts_title" scope="col">제목</th>
-               <th class="posts_title" scope="col"><i class="fas fa-map-marker-alt"></i></th>
-               <th class="posts_title" scope="col"><i class="fas fa-user"></i></th>
-               <th class="posts_title" scope="col">Due</th>   
+               <th class="posts_head" scope="col">#</th>
+               <th class="posts_head" id="posts_title" scope="col">제목</th>
+               <th class="posts_head" scope="col"><i class="fas fa-map-marker-alt"></i></th>
+               <th class="posts_head" scope="col"><i class="fas fa-user"></i></th>
+               <th class="posts_head" scope="col">Due</th>   
            </tr>
        </thead>
  
@@ -55,7 +55,36 @@
         {% endfor %}   
        </tbody>
    </table>
+
+
+   <!-- 페이지네이터 코드 -->
+   <div>
+        <nav aria-label="Page navigation example" id="paginator_container">
+            <ul class="pagination">
+            <!-- 이전 페이지 버튼 -->    
+                {% if posts.has_previous %}    
+                <li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                {% else %}
+                <li class="page-item disabled"><a class="page-link" href="?page=1" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                {% endif %}
+            
+            <!-- 페이지 숫자 나타내기 -->    
+                {% for i in page_range %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endfor %}
+            
+            <!-- 다음 페이지 버튼 -->    
+                {% if posts.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                {% else %}
+                <li class="page-item disabled"><a class="page-link" href="?page={{ posts.paginator.num_pages }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                {% endif %}
+            </ul>
+        </nav>
+   </div>
+
+
 </div>
 
- 
+
 {% endblock %}

@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required # 로그인된 유저�
 from accounts.models import Profile
 from django.utils import timezone
 import random
+from django.db.models import Count
 
 # Create your views here.
 
@@ -21,7 +22,6 @@ import random
 # 아래에 영수 수정
 
 
-
 # 둘러보기 페이지
 def spots(request):
     listtype = request.GET.get('listtype', '')  # listtype이라는 이름으로 GET방식으로 보낸 데이터를 저장
@@ -29,7 +29,8 @@ def spots(request):
     if listtype == '최신순':
         travels = Travel.objects.all().order_by('-id')  # Travel 모델 pk 기준 내림차순으로 데이터 정렬하기(최신순)
     elif listtype == '인기순':
-        travels = Travel.objects.all().order_by('-liked_users')  # Travel 모델 좋아요가 많은순으로 데이터 정렬(인기순)
+        travels = Travel.objects.annotate(like=Count('liked_users__liked_travels')).order_by('-like', '-id')
+        # 좋아요순으로 내림차순 / 좋아요 개수가 같으면 id 내림차순으로 설정  
     else:
         travels = Travel.objects.all()  # Travel 모델 데이터 전부 다 travels라는 변수에 저장
 
@@ -39,12 +40,22 @@ def spots(request):
     if locationsearch == '제주전체':                          # 데이터 value에 따라 Travel 모델 필드값을 필터링해서 보여주기
         travels = Travel.objects.all().filter(location__icontains='jeju')
     elif locationsearch == '제주시':
-        travels = Travel.objects.all().filter(region__icontains='제주시')
-    elif locationsearch == '서귀포시':
-        travels = Travel.objects.all().filter(region__icontains='서귀포시')
+        travels = Travel.objects.all().filter(region__icontains='제주시')    
+    elif locationsearch == '한림읍':
+        travels = Travel.objects.all().filter(region__icontains='한림읍')
+    elif locationsearch == '한경면':
+        travels = Travel.objects.all().filter(region__icontains='한경면')
+    elif locationsearch == '안덕면':
+        travels = Travel.objects.all().filter(region__icontains='안덕면')
+    elif locationsearch == '성산읍':
+        travels = Travel.objects.all().filter(region__icontains='성산읍')
+    elif locationsearch == '남원읍':
+        travels = Travel.objects.all().filter(region__icontains='남원읍')    
     elif locationsearch == '애월읍':
-        travels = Travel.objects.all().filter(region__icontains='애월읍')   
-
+        travels = Travel.objects.all().filter(region__icontains='애월읍') 
+    elif locationsearch == '구좌읍':
+        travels = Travel.objects.all().filter(region__icontains='구좌읍')      
+                       
 
     q = request.GET.get('query', '')  # 검색창에서 검색한 값은 query라는 이름으로 정했고 GET방식으로 보낸 데이터를 저장
 
