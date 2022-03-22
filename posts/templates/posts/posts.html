@@ -31,26 +31,26 @@
            <tr>
                <th class="posts_head" scope="col">#</th>
                <th class="posts_head" id="posts_title" scope="col">제목</th>
-               <th class="posts_head" scope="col"><i class="fas fa-map-marker-alt"></i></th>
+               <!-- <th class="posts_head" scope="col"><i class="fas fa-map-marker-alt"></i></th> -->
                <th class="posts_head" scope="col"><i class="fas fa-user"></i></th>
-               <th class="posts_head" scope="col">Due</th>   
+               <th class="posts_head" scope="col">작성일</th>
+               <!-- <th class="posts_head" scope="col">Due</th>    -->
            </tr>
        </thead>
  
        <tbody>
         {% for post in posts %}
-           <tr>   
+           <tr>
                <td></td>
                <td><a id="post_detail_a" href="{% url 'posts:detail' post.id %}">{{ post.title }} 
-                {% if post.post_comments %}   
-                    ({{ post.post_comments.count }})
-                {% else %}
-                <p>dd</p>    
+                {% if post.post_comments.count %}   
+                    ({{ post.post_comments.count }})    
                 {% endif %}
                 </a></td>
-               <td>{{ post.location }}</td>
+               <!-- <td>{{ post.location }}</td> -->
                <td>{{ post.user }}</td>
-               <td>{{ post.due|date:'Y-m-d' }}</td>  
+               <td>{{ post.created_at|date:'Y-m-d' }}</td>
+               <!-- <td>{{ post.due|date:'Y-m-d' }}</td>   -->
            </tr> 
         {% endfor %}   
        </tbody>
@@ -70,7 +70,11 @@
             
             <!-- 페이지 숫자 나타내기 -->    
                 {% for i in page_range %}
+                {% if i == posts.number %}  
+                <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% else %}
                 <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
                 {% endfor %}
             
             <!-- 다음 페이지 버튼 -->    

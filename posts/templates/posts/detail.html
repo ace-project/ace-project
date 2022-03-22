@@ -11,8 +11,8 @@
    <!-- 게시글 제목 -->
    <div class="title_container">
        <h1 id="detail_title">{{ post.title }}</h1>
-       <h2 id="detail_due">Due : {{ post.due|date:'Y-m-d' }}</h2>
-       <h2 id="detail_photospot">포토스팟 : {{ post.location }}</h2>
+       <!-- <h2 id="detail_due">Due : {{ post.due|date:'Y-m-d' }}</h2>
+       <h2 id="detail_photospot">포토스팟 : {{ post.location }}</h2> -->
    </div>
    <!-- 게시글 유저와 생성일 -->
    <div class="user_info_container">
@@ -48,9 +48,15 @@
    <!-- 댓글 표시 -->
    <div class="post_comment">
        {% for comment in post.post_comments.all %}    <!-- 이 부분을 view해서 다시해보기! -->
+       {% if profile == post_author %}
            <p>{{ comment.author }} <span>{{ comment.created_at|date:'Y-m-d H:i:s' }}</span></p>
            <p>{{ comment.content }}</p>
            <hr>
+        {% else %}
+            <p>{{ comment.author }} <span>{{ comment.created_at|date:'Y-m-d H:i:s' }}</span></p>
+            <p>비밀 댓글입니다.</p>
+            <hr>   
+       {% endif %}     
        {% endfor %}   
    </div>
 </div>

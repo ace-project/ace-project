@@ -81,4 +81,14 @@ h1 {
 
 
 
+/* paginator 버튼 */
+.pagination > li > a {
+   background-color: white;
+   color: #141414;
+}
+
+.pagination > .page-item.active > a {
+   background-color: #EA6A6B;
+   border: solid 1px #EA6A6B;
+}
 

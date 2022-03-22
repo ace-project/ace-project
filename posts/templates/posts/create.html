@@ -16,12 +16,12 @@
 
             <!-- 지역 선택 및 등록 버튼 -->
             <div>
-                <select id="select_photospot" name="photospot" required>
+                <!-- <select id="select_photospot" name="photospot" required>
                     <option value="" disabled selected>포토스팟 선택</option>
                     {% for travel in travels %}
                     <option value="{{ travel.title }}">{{ travel.title }}</option>
                     {% endfor %}
-                </select>
+                </select> -->
             
                 <button id="write_submit" type="submit">등록</button>
             </div>
@@ -33,10 +33,10 @@
             <div class="mb-3">
                 <textarea class="form-control" id="body" rows="5" name="body" placeholder="내용을 입력해주세요."></textarea>
             </div>
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label for="due">기한 설정하기</label>
                 <input type="date" class="form-control" id="due" name="due" style="margin-top: 10px;">
-            </div>
+            </div> -->
 
         </form>
     </div>    

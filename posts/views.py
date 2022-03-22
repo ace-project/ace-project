@@ -16,6 +16,8 @@ from django.core.paginator import Paginator
 def index(request):
  
    posts = Post.objects.all().order_by('-id')    # Post 모델 데이터 전부를 조회해서 posts 변수에 저장
+   lists = list(posts)
+
 
    # 페이지네이터 코드
    paginator = Paginator(posts, 4)
@@ -24,10 +26,16 @@ def index(request):
 
    page_range = paginator.page_range
 
+   # 검색 기능
+   q = request.GET.get('query', '')
+   if q:
+       posts = Post.objects.all().filter(title__icontains=q)
+
    
    context = {
        'posts': posts,
        'page_range': page_range,
+       'lists': lists,
    }
   
    return render(request, 'posts/posts.html', context)
@@ -38,9 +46,17 @@ def index(request):
 def detail(request, post_id):
  
    post = Post.objects.get(id=post_id)   # Posts 모델 데이터 1개 조회 후 post 변수에 저장
- 
+   post_author = str(post.user)
+
+   user = request.user
+   profile = Profile.objects.get(user=user)  # 비밀댓글 기능을 위한 Profile 모델 조회 - 로그인된 유저의 profile 데이터 가져오기
+   profile = str(profile.user)
+   
+
    context = {
        'post': post,
+       'profile': profile,
+       'post_author': post_author,
    }
  
    return render(request, 'posts/detail.html', context)
@@ -73,10 +89,10 @@ def create(request):
         user = Profile.objects.get(user=user)
         title = request.POST.get('title')
         body = request.POST.get('body')
-        due = request.POST.get('due')
-        location = request.POST.get('photospot')
+        # due = request.POST.get('due')
+        # location = request.POST.get('photospot')
 
-        post = Post(user=user, title=title, body=body, location=location, due=due)
+        post = Post(user=user, title=title, body=body, location='none')
         post.save()
 
         return redirect('posts:index')
@@ -101,8 +117,8 @@ def edit(request, post_id):
     if request.method == 'POST':
         post.title = request.POST.get('title')
         post.body = request.POST.get('body')
-        post.due = request.POST.get('due')
-        post.location = request.POST.get('photospot')
+        # post.due = request.POST.get('due')
+        # post.location = request.POST.get('photospot')
         post.save()
 
         return redirect('posts:detail', post_id=post.id)
