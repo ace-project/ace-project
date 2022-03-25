@@ -6,11 +6,7 @@
 {% endblock %}
 
 {% block content %}
-<h1>포토스팟 찾기</h1>
-
-<!-- 검색창 -->
-
-<h2>MAP</h2>
+<!-- <h1>포토스팟 찾기</h1> -->
 
 {%if user.is_authenticated %}
 <div>
@@ -31,13 +27,14 @@
     <div id="card_image">
       <img id="image_test" src="/media/travels/default.png" alt="default_image">
     </div>
-    <div id="card_title">
-      <!-- <h3>이호태우 등대</h5> -->
+    <div id="card_title">마커를 클릭해보세요! :)</div>
+    <div id="card_content"></div>
+    <div id="card_hashtag"></div>
+    <div id="card_button">
+      <!-- <a id="show_detail" href="">자세히 보기</a> -->
+      <a id="btn_a" href="/travels/map/">자세히 알아보기</a>
     </div>
-    <div id="card_content">
-      <!-- <p>푸른 바다와 귀여운 조랑말 등대가 있는 포토스팟</p> -->
-    </div>
-    <button id="btn"><a id="btn_a" href="/travels/spots/1/">자세히 보기</a> </button>
+    
   </div>
 </div>
 
@@ -77,12 +74,18 @@
   {% endfor %}
 </div>
 
+<div id="shortContent" style="display: none;">
+  {% for re in spots %}
+  {{ re.short_content}},
+  {% endfor %}
+</div>
+
 <script type="text/javascript"
   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7017ebc62c378fa5ebb089d1fd591804&libraries=services,clusterer,drawing"></script>
 <script>
   var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
     mapOption = {
-      center: new kakao.maps.LatLng(33.5013521, 126.453379), // 지도의 중심좌표
+      center: new kakao.maps.LatLng(33.3803481250219, 126.54526877357988), // 지도의 중심좌표
       level: 10// 지도의 확대 레벨
     };
 
@@ -96,6 +99,7 @@
   var list_image = document.getElementById("image").innerText.split(',');
   var list_hashtag = document.getElementById("hashtag").innerText.split(',');
   var list_id_number = document.getElementById("id").innerText.split(',');
+  var list_shortContent = document.getElementById("shortContent").innerText.split(',');
 
   var positions = new Array();
   var id_array = [];
@@ -130,30 +134,12 @@
       image: markerImage, // 마커 이미지 
     });
 
-    // var content1 = '<div class="wrap">' +
-    //   '     <div class="info">' +
-    //   '        <div class="title">' +
-    //   '            이호테우 등대' +
-    //   '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
-    //   '        </div>' +
-    //   '        <div class="body">' +
-    //   '            <div class="img">' +
-    //   '                <img src="/media/travels/1이호테우등대1.jpg" width="73" height="70">' +
-    //   '           </div>' +
-    //   '            <div class="desc">' +
-    //   '                <div class="ellipsis">제주특별자치도</div>' +
-    //   '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' +
-    //   '                <div><a href="http://localhost:8000/travels/spots/1/" target="_blank" class="link">자세히 보기</a></div>' +
-    //   '            </div>' +
-    //   '        </div>' +
-    //   '    </div>' +
-    //   '</div>';
-
     var iwContent = "<div style='height:60px; width:300px;'>" + list_id_number[i] + list_name[i] + "</br>" + list_hashtag[i] + "</div>" + "<img style='height: 300px; width:300px;' src=" + list_image[i] + ">";
-    
-    const test = list_name[i];
+
+    const test_title = list_name[i];
     const test_image = list_image[i];
-    // 상백 추가
+    const test_content = list_shortContent[i];
+    const test_hashtag = list_hashtag[i];
     const test_id = list_id_number[i];
     const id = test_id.replace(/\s*/g, "");
 
@@ -162,29 +148,24 @@
     });
 
     (function (marker, infoWindow) {
-      kakao.maps.event.addListener(marker, 'mouseover', function () {
-        infoWindow.open(map, marker);
-      })
-      kakao.maps.event.addListener(marker, 'mouseout', function () {
-        infoWindow.close();
-      })
+      // kakao.maps.event.addListener(marker, 'mouseover', function () {
+      //   infoWindow.open(map, marker);
+      // })
+      // kakao.maps.event.addListener(marker, 'mouseout', function () {
+      //   infoWindow.close();
+      // })
 
       kakao.maps.event.addListener(marker, 'click', function () {
         //console.log(marker);
-        document.getElementById('card_content').innerHTML = test;
+        document.getElementById('card_title').innerHTML = test_title;
         document.getElementById('image_test').src = test_image;
-        // 상백 추가
+        document.getElementById('card_content').innerHTML = test_content;
+        document.getElementById('card_hashtag').innerHTML = test_hashtag;
         document.getElementById('btn_a').href = '/travels/spots/' + id + '/';
       })
     })(marker, infoWindow);
 
     marker.setMap(map);
-
-    // var $card_image = document.getElementById("card_image");
-    // var $card_title = document.getElementById("card_title");
-    // var $card_content = document.getElementById("card_content");
-
-    // var clicked_marker_positions = marker.getPosition();
   }
 
 </script>

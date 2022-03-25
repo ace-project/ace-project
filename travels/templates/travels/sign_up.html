@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'sign_up_style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="signup-outer-page">
+
+    <div class="signup-page">
+    
+    
+        <div class="signup-box"> 
+    
+        <!-- 에러 메세지 띄우기 -->
+            <div id="signup-error-box">
+            {% if error %}
+                <div id="signup-error" class="alert alert-danger mt-3">
+                    {{ error }}
+                </div>
+            {% endif %}
+            </div>
+    
+            <!-- 로그인 정보 받기 -->
+            <form method="POST" action="{% url 'accounts:sign_up' %}" enctype="multipart/form-data"> 
+                    {% csrf_token %}
+                <div id="signup-form-box">
+                        <div id="signup-form1" lass="mb-2 col-lg-3">
+                            <label  class="form-label" for="username">아이디</label>
+                            <input class="form-control" type="text" id="username" name="username" placeholder="아이디">
+                        </div>
+                
+                        <div id="signup-form2" class="mb-2 col-lg-3">
+                            <label  style="margin: 0px;" class="form-label" for="password">비밀번호</label>
+                            <input class="form-control" type="password" id="password" name="password" placeholder="비밀번호">
+                        </div>
+                
+                        <div id="signup-form3" style="align-items:center; " class="mb-2 col-lg-3">
+                            <label style="margin: 0px;" class="form-label" for="password_check">비밀번호 확인</label>
+                            <input class="form-control" type="password" id="password_check" name="password_check" placeholder="비밀번호 확인">
+                        </div>
+                
+                        <div id="signup-form4" class="mb-2 col-lg-3">
+                            <label style="margin: 0px;" class="form-label" for="email">이메일</label>
+                            <input class="form-control" type="email" id="email" name="email" placeholder="이메일">
+                        </div>
+
+                        <button class="btn btn-secondary" type="submit" id="signup_button" style="margin-top: 20px"> 회원가입</button>
+                    </div>
+                    <div id="signup-blank3">
+                        <div id="signup-blank2"><a id="signup-blank2" href="{% url 'accounts:login' %}">이미 회원이신가요?</a></div>
+                    </div>
+                </div>
+            </form>
+    
+
+        </div>
+    
+        <div class="signup-blank-bottom"></div>
+    </div>
+ 
+    </div>
+
+    <!-- ddddd -->
+
+
+
+
+
+
+
+
+<!-- 회원가입 정보 받기 -->
+<!-- <div class="row">
+    <form method="POST" action="{% url 'accounts:sign_up' %}" enctype="multipart/form-data">  
+        {% csrf_token %}
+        
+        <div class="mb-2 col-lg-3">
+            <label class="form-label" for="username">아이디</label>
+            <input class="form-control" type="text" id="username" name="username" placeholder="아이디">
+        </div>
+
+        <div class="mb-2 col-lg-3">
+            <label class="form-label" for="password">비밀번호</label>
+            <input class="form-control" type="password" id="password" name="password" placeholder="비밀번호">
+        </div>
+
+        <div class="mb-2 col-lg-3">
+            <label class="form-label" for="password_check">비밀번호 확인</label>
+            <input class="form-control" type="password" id="password_check" name="password_check" placeholder="비밀번호 확인">
+        </div>
+
+        <div class="mb-2 col-lg-3">
+            <label class="form-label" for="email">이메일</label>
+            <input class="form-control" type="email" id="email" name="email" placeholder="이메일">
+        </div> -->
+
+        <!-- <div class="mb-2 col-lg-3">
+            <label class="form-label" for="age">나이</label>
+            <input class="form-control" type="number" id="age" name="age" placeholder="나이">
+        </div>
+
+        <div class="mb-2 col-lg-3">
+            <p class="mt-3">성별</p>
+            <input type="checkbox" id="gender" name="gender" value="남자">
+            <label class="form-label" for="gender">남</label>
+            <input type="checkbox" id="gender" name="gender" value="여자">
+            <label class="form-label" for="gender">여</label>
+        </div>
+
+        <div class="mb-2 col-lg-3">
+            <label class="form-label" for="image">프로필 사진</label>
+            <input class="form-control" type="file" id="image" name="image" placeholder="프로필 사진 업로드">
+        </div> -->
+
+        <!-- <div class="mb-2">
+            <button type="submit">회원가입</button>
+        </div>
+
+    </form>
+</div> -->
+
+
+{% endblock %}
