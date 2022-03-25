@@ -30,6 +30,7 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     travel = models.ForeignKey(Travel, on_delete=models.CASCADE, null=True, related_name='travel_comments')
     post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, related_name='post_comments')
+    secret = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.author} {self.travel} {self.post}'

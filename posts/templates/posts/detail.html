@@ -40,6 +40,7 @@
    <div class="comment_container">
        <form class="comment_form" method="POST" action="{% url 'posts:comment' post.id %}">
            {% csrf_token %}
+           <label id="secret_check"><input id="secret_checkbox" type="checkbox" name="secret_comment" value="True">비밀댓글 체크</label>
            <textarea name="content" id="" cols="150" rows="5" placeholder="함께 사진을 찍어보세요!"></textarea>
            <button type="submit">댓글 달기</button>
        </form>
@@ -47,9 +48,24 @@
  
    <!-- 댓글 표시 -->
    <div class="post_comment">
-       {% for comment in post.post_comments.all %}    
-           <p>{{ comment.author }} <span>{{ comment.created_at|date:'Y-m-d H:i:s' }}</span></p>
-           <p>{{ comment.content }}</p>
+       {% for comment in post.post_comments.all %}  
+        <!-- 비밀댓글 체크 X -->
+        {% if comment.secret == False %}
+            <p>{{ comment.author }} <span>{{ comment.created_at|date:'Y-m-d H:i:s' }}</span></p>
+            <p>{{ comment.content }}</p> 
+        <!-- 글 작성자라면 -->
+        {% elif comment.secret == True and user == post.user.user %}
+            <p>{{ comment.author }} <span>{{ comment.created_at|date:'Y-m-d H:i:s' }}</span></p>
+            <p>{{ comment.content }}</p> 
+        <!-- 댓글 작성자라면 -->
+        {% elif comment.secret == True and user == comment.author.user %}
+            <p>{{ comment.author }} <span>{{ comment.created_at|date:'Y-m-d H:i:s' }}</span></p>
+            <p>{{ comment.content }}</p> 
+        <!-- 비밀댓글 체크 O -->
+        {% elif comment.secret == True %}
+            <p>{{ comment.author }} <span>{{ comment.created_at|date:'Y-m-d H:i:s' }}</span></p>
+            <p style="color: #A29F9F; font-weight: 500;">비밀댓글 입니다.</p>     
+        {% endif %}    
            <!-- 댓글 삭제 버튼 -->
            {% if user == comment.author.user %}
                 <a href="{% url 'posts:comment_delete' post.id comment.id %}"><button id="comment_delete" type="submit" name="delete">삭제</button></a>

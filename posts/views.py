@@ -61,17 +61,26 @@ def detail(request, post_id):
 # 게시판 디테일 페이지 댓글
 @login_required
 def comment(request, post_id):
+    
    if request.method == 'POST':
-       user = request.user
-       author = Profile.objects.get(user=user)
+        user = request.user
+        author = Profile.objects.get(user=user)
+    
+        content = request.POST.get('content')
+        post = Post.objects.get(id=post_id)
+        
+        secret = request.POST.get('secret_comment', 'False')
+    
+        comment = Comment(author=author, content=content, created_at=timezone.now(), post=post, secret=secret)
+        comment.save()
+
+        return redirect('posts:detail', post_id=post.id)
+   return redirect('posts:detail', post_id=post.id)  
+    
+
+
  
-       content = request.POST.get('content')
-       post = Post.objects.get(id=post_id)
- 
-       comment = Comment(author=author, content=content, created_at=timezone.now(), post=post)
-       comment.save()
- 
-       return redirect('posts:detail', post_id=post.id)
+                
 
 
 # 게시판 디테일 페이지 댓글 삭제

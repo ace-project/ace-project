@@ -88,6 +88,19 @@
 }
 
 
+/* 비밀댓글 체크 버튼 */
+#secret_check {
+   display: flex;
+   justify-content: right;
+   padding: 5px;
+}
+
+#secret_checkbox {
+   margin-right: 5px;
+   margin-top: 5px;
+}
+
+
  /* 글 수정 버튼 */
  #edit_button {
     background-color: #EBEBEB;
