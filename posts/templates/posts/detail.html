@@ -47,16 +47,14 @@
  
    <!-- 댓글 표시 -->
    <div class="post_comment">
-       {% for comment in post.post_comments.all %}    <!-- 이 부분을 view해서 다시해보기! -->
-       {% if profile == post_author %}
+       {% for comment in post.post_comments.all %}    
            <p>{{ comment.author }} <span>{{ comment.created_at|date:'Y-m-d H:i:s' }}</span></p>
            <p>{{ comment.content }}</p>
+           <!-- 댓글 삭제 버튼 -->
+           {% if user == comment.author.user %}
+                <a href="{% url 'posts:comment_delete' post.id comment.id %}"><button id="comment_delete" type="submit" name="delete">삭제</button></a>
+           {% endif %}
            <hr>
-        {% else %}
-            <p>{{ comment.author }} <span>{{ comment.created_at|date:'Y-m-d H:i:s' }}</span></p>
-            <p>비밀 댓글입니다.</p>
-            <hr>   
-       {% endif %}     
        {% endfor %}   
    </div>
 </div>

@@ -78,6 +78,15 @@
  }
 
 
+/* 댓글 삭제 버튼 */
+#comment_delete {
+   background: none;
+   background-color: #EBEBEB;
+   border: 1px solid #EBEBEB;
+   padding: 3px;
+   border-radius: 5px;
+}
+
 
  /* 글 수정 버튼 */
  #edit_button {

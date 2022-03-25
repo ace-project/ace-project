@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load post_filter %}
 {% load static %}
  
  
@@ -41,7 +42,7 @@
        <tbody>
         {% for post in posts %}
            <tr>
-               <td></td>
+               <td>{{ posts.paginator.count|sub:posts.start_index|sub:forloop.counter0|add:1 }}</td>
                <td><a id="post_detail_a" href="{% url 'posts:detail' post.id %}">{{ post.title }} 
                 {% if post.post_comments.count %}   
                     ({{ post.post_comments.count }})    

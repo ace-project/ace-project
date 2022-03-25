@@ -13,6 +13,9 @@ urlpatterns = [
     # 게시판 디테일 페이지 댓글 생성
     path('<int:post_id>/comment/', views.comment, name='comment'),
 
+    # 게시판 디테일 페이지 댓글 삭제
+    path('<int:post_id>/comment/<int:comment_id>/', views.comment_delete, name='comment_delete'),
+
     # 게시판 글 생성하기 
     path('create/', views.create, name='create'),
 

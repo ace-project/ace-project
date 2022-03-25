@@ -134,8 +134,8 @@
                         <p>{{ comment.content }}</p>        
                     
                     <!-- 댓글 삭제 버튼 -->
-                    {% if user == comment.author %}
-                        <button>삭제</button>
+                    {% if user == comment.author.user %}
+                        <a href="{% url 'travels:comment_delete' travel.id comment.id %}"><button id="comment_delete" type="submit" name="delete">삭제</button></a>
                     {% endif %}
                     </div>
                     

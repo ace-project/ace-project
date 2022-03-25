@@ -1,5 +1,5 @@
 from multiprocessing import context
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Post
 from travels.models import Comment, Travel
 from accounts.models import Profile
@@ -16,26 +16,27 @@ from django.core.paginator import Paginator
 def index(request):
  
    posts = Post.objects.all().order_by('-id')    # Post 모델 데이터 전부를 조회해서 posts 변수에 저장
-   lists = list(posts)
-
+   
 
    # 페이지네이터 코드
-   paginator = Paginator(posts, 4)
+   paginator = Paginator(posts, 5)
    page = request.GET.get('page')
    posts = paginator.get_page(page)
 
    page_range = paginator.page_range
+
+
 
    # 검색 기능
    q = request.GET.get('query', '')
    if q:
        posts = Post.objects.all().filter(title__icontains=q)
 
+
    
    context = {
        'posts': posts,
        'page_range': page_range,
-       'lists': lists,
    }
   
    return render(request, 'posts/posts.html', context)
@@ -44,19 +45,13 @@ def index(request):
  
 # 게시판 디테일 페이지
 def detail(request, post_id):
+   
  
    post = Post.objects.get(id=post_id)   # Posts 모델 데이터 1개 조회 후 post 변수에 저장
-   post_author = str(post.user)
-
-   user = request.user
-   profile = Profile.objects.get(user=user)  # 비밀댓글 기능을 위한 Profile 모델 조회 - 로그인된 유저의 profile 데이터 가져오기
-   profile = str(profile.user)
    
-
+    
    context = {
        'post': post,
-       'profile': profile,
-       'post_author': post_author,
    }
  
    return render(request, 'posts/detail.html', context)
@@ -77,6 +72,17 @@ def comment(request, post_id):
        comment.save()
  
        return redirect('posts:detail', post_id=post.id)
+
+
+# 게시판 디테일 페이지 댓글 삭제
+def comment_delete(request, post_id, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    post = Post.objects.get(pk=post_id)
+
+    comment.delete()
+
+    return redirect('posts:detail', post_id=post.id)
+
 
 
 # 게시판 글 생성하기

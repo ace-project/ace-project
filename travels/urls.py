@@ -19,6 +19,9 @@ urlpatterns = [
 
     # 포토스팟 1개 댓글 생성 URL
     path('spots/<int:travel_id>/comment/', views.comment, name='comment'),
+
+    # 포토스팟 1개 댓글 삭제 URL
+    path('spots/<int:travel_id>/comment/<int:comment_id>/', views.comment_delete, name="comment_delete")
 ]
 
 
