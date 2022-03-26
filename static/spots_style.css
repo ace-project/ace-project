@@ -32,11 +32,14 @@
     flex-direction: row;
     height: 37.97px;
     width: 400px;
+
 }
 
 #spots-search-b{
     width: 100px;
     margin-left: 3px;
+    background-color: var(--main-color1);
+    border: none;
 }
 
 .dropdowns{
@@ -48,7 +51,15 @@
 
 .dropdown{
     margin-right: 10px;
+    
 }
+
+#dropdownMenu2, #dropdownMenu1{
+    background-color: var(--main-color1);
+    border: none;
+}
+
+
 
 .spots-box{
     width: 267px;

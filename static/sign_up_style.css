@@ -38,7 +38,7 @@
   padding: 20px;
 }
 #signup-error-box {
-  width: 450px;
+  width: 420px;
   height: 40px;
   margin-bottom: 10px;
 }
@@ -93,7 +93,7 @@
 
 #signup-blank3 {
   height: 80px;
-  padding-top: 40px;
+  padding-top: 50px;
   display: flex;
   flex-direction: row;
   align-items: center;
