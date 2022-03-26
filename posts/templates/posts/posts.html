@@ -43,20 +43,37 @@
             </thead>
         
             <tbody>
-                {% for post in posts %}
-                <tr>
-                    <td>{{ posts.paginator.count|sub:posts.start_index|sub:forloop.counter0|add:1 }}</td>
-                    <td><a id="post_detail_a" href="{% url 'posts:detail' post.id %}">{{ post.title }} 
-                        {% if post.post_comments.count %}   
-                            ({{ post.post_comments.count }})    
-                        {% endif %}
-                        </a></td>
-                    <!-- <td>{{ post.location }}</td> -->
-                    <td>{{ post.user }}</td>
-                    <td>{{ post.created_at|date:'Y-m-d' }}</td>
-                    <!-- <td>{{ post.due|date:'Y-m-d' }}</td>   -->
-                </tr> 
-                {% endfor %}   
+                {% if not q %}
+                    {% for post in posts_page %}
+                    <tr>
+                        <td>{{ posts_page.paginator.count|sub:posts_page.start_index|sub:forloop.counter0|add:1 }}</td>
+                        <td><a id="post_detail_a" href="{% url 'posts:detail' post.id %}">{{ post.title }} 
+                            {% if post.post_comments.count %}   
+                                ({{ post.post_comments.count }})    
+                            {% endif %}
+                            </a></td>
+                        <!-- <td>{{ post.location }}</td> -->
+                        <td>{{ post.user }}</td>
+                        <td>{{ post.created_at|date:'Y-m-d' }}</td>
+                        <!-- <td>{{ post.due|date:'Y-m-d' }}</td>   -->
+                    </tr> 
+                    {% endfor %}  
+                {% else %}
+                    {% for post in posts_page %}
+                    <tr>
+                        <td></td>
+                        <td><a id="post_detail_a" href="{% url 'posts:detail' post.id %}">{{ post.title }} 
+                            {% if post.post_comments.count %}   
+                                ({{ post.post_comments.count }})    
+                            {% endif %}
+                            </a></td>
+                        <!-- <td>{{ post.location }}</td> -->
+                        <td>{{ post.user }}</td>
+                        <td>{{ post.created_at|date:'Y-m-d' }}</td>
+                        <!-- <td>{{ post.due|date:'Y-m-d' }}</td>   -->
+                    </tr> 
+                    {% endfor %}
+                {% endif %}      
             </tbody>
         </table>
 
@@ -66,15 +83,15 @@
             <nav aria-label="Page navigation example" id="paginator_container">
                 <ul class="pagination">
                 <!-- 이전 페이지 버튼 -->    
-                    {% if posts.has_previous %}    
-                    <li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                    {% if posts_page.has_previous %}    
+                    <li class="page-item"><a class="page-link" href="?page={{ posts_page.previous_page_number }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
                     {% else %}
                     <li class="page-item disabled"><a class="page-link" href="?page=1" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
                     {% endif %}
                 
                 <!-- 페이지 숫자 나타내기 -->    
                     {% for i in page_range %}
-                    {% if i == posts.number %}  
+                    {% if i == posts_page.number %}  
                     <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
                     {% else %}
                     <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
@@ -82,10 +99,10 @@
                     {% endfor %}
                 
                 <!-- 다음 페이지 버튼 -->    
-                    {% if posts.has_next %}
-                    <li class="page-item"><a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                    {% if posts_page.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ posts_page.next_page_number }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
                     {% else %}
-                    <li class="page-item disabled"><a class="page-link" href="?page={{ posts.paginator.num_pages }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                    <li class="page-item disabled"><a class="page-link" href="?page={{ posts_page.paginator.num_pages }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
                     {% endif %}
                 </ul>
             </nav>

@@ -21,7 +21,7 @@ def index(request):
    # 페이지네이터 코드
    paginator = Paginator(posts, 10)
    page = request.GET.get('page')
-   posts = paginator.get_page(page)
+   posts_page = paginator.get_page(page)
 
    page_range = paginator.page_range
 
@@ -30,13 +30,15 @@ def index(request):
    # 검색 기능
    q = request.GET.get('query', '')
    if q:
-       posts = Post.objects.all().filter(title__icontains=q)
+       posts_page = Post.objects.all().filter(title__icontains=q)
 
 
    
    context = {
        'posts': posts,
        'page_range': page_range,
+       'posts_page': posts_page,
+       'q': q,
    }
   
    return render(request, 'posts/posts.html', context)
