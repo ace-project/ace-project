@@ -100,50 +100,26 @@
   flex-direction: column;
   width: 350px;
   height: 100%;
-  background-color: #e9eef1;
-  border-radius: 10%;
-  /* border-radius: 10%; */
+  background-color: white;
+  border-radius: 5%;
 }
 
 #card_image {
   width: 350px;
   height: 350px;
   object-fit: cover;
-  /* border-radius: 10%; */
-}
-
-#card_hover_text {
-  display: table;
-  position: absolute;
-  z-index: 2;
-  width: 267px;
-  height: 267px;
-  color: var(--text-highlight);
-  text-align: center;
   border-radius: 5%;
-}
-
-#card_hover_text p {
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 18px;
-  font-weight: 700;
-}
-
-#card_hover_text:hover {
-  opacity: 1;
 }
 
 #image_test {
   width: 350px;
   height: 350px;
-  border-radius: 10% 10% 0 0;
-  /* border-radius: 10%; */
+  padding: 20px;
+  border-radius: 5%;
 }
 
 #card_title {
-  text-align: center;
+  text-align: left;
   margin-top: 10px;
   margin-bottom: 10px;
   font-size: 25px;
@@ -161,9 +137,8 @@
   display: flex;
   flex-direction: column;
   /* background-color: var(--text-color); */
-  border-radius: 10%;
   /* margin-top: 10px; */
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 #card_content {
@@ -173,26 +148,24 @@
   font-weight: 700;
 }
 
-#card_info-container{
-  height: 100%;
+#card_info-container {
+  height: 50%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-}
-
-#card_address {
-  font-size: 16px;
-
-  text-align: center;
-  color: var(--main-color1);
-  font-weight: 700;
-  margin-top: 10px;
+  /* justify-content: space-around; */
+  padding: 20px;
 }
 
 #card_hashtag {
-  font-size: 16px;
+  font-size: 14px;
+  color: var(--shade1);
+  font-weight: 700;
+  text-align: left;
+}
 
-  text-align: center;
+#card_region {
+  font-size: 16px;
+  text-align: right;
   color: var(--shade1);
   font-weight: 700;
 }
@@ -229,16 +202,6 @@
   margin-top: -86px;
   margin-left: -89px;
   text-align: center;
-}
-
-a#btn_a {
-  color: rgba(30, 22, 54, 0.6);
-  box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
-}
-
-a#btn_a:hover {
-  color: rgba(255, 255, 255, 0.85);
-  box-shadow: rgba(30, 22, 54, 0.7) 0 0px 0px 40px inset;
 }
 
 .spot-like {

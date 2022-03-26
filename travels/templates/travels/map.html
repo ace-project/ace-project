@@ -9,26 +9,30 @@
 {% block content %}
 <!-- <h1>포토스팟 찾기</h1> -->
 <div class="map-page">
-  
+
   <div class="map-like-filter">
-    
-      {%if user.is_authenticated %}
-      
-        <form class="map-like-filter-form" action="" method="post">
-          {%csrf_token%}
-          <label class="map-filter-label"><input type="radio" autocomplete="off" name="selected" id="selected" value="1"><p id="map-filter-title">좋아하는 스팟</p></label>
-          <label class="map-filter-label" ><input type="radio" autocomplete="off" name="selected" id="selected" value="2"><p id="map-filter-title">전체 스팟</p></label>
-          <button class="btn btn-secondary" id="map-filter-button" type="submit">모아보기</button>
+
+    {%if user.is_authenticated %}
+
+    <form class="map-like-filter-form" action="" method="post">
+      {%csrf_token%}
+      <label class="map-filter-label"><input type="radio" autocomplete="off" name="selected" id="selected" value="1">
+        <p id="map-filter-title">좋아하는 스팟</p>
+      </label>
+      <label class="map-filter-label"><input type="radio" autocomplete="off" name="selected" id="selected" value="2">
+        <p id="map-filter-title">전체 스팟</p>
+      </label>
+      <button class="btn btn-secondary" id="map-filter-button" type="submit">모아보기</button>
 
 
-        </form>
+    </form>
 
-      {% else %}
-        <div>
-          <a id="map-login" href="{% url 'accounts:login' %}">로그인하고 좋아하는 스팟만 모아보세요!</a>
-        </div>
-      {%endif%}
-    
+    {% else %}
+    <div>
+      <a id="map-login" href="{% url 'accounts:login' %}">로그인하고 좋아하는 스팟만 모아보세요!</a>
+    </div>
+    {%endif%}
+
   </div>
 
   <div class="map-container">
@@ -38,163 +42,173 @@
     <div id="card">
       <div id="card_image">
         <a id="btn_a" href="/travels/map/">
-          <div id="card_hover_text"><p></p></div>
+          <div id="card_hover_text">
+            <p></p>
+          </div>
           <img id="image_test" src="/media/travels/default_image.jpg" alt="default_image">
         </a>
       </div>
-      <div id="card_title"><p id="card-text">지도 위의 스팟을 클릭해보세요! :)</p></div>
+
       <div id="card_info-container">
         <div id="card_info">
-            <div id="card_content"></div>
-            <div id="card_hashtag"></div>
-          <div id="card_address"></div>
-          </div>
-      </div>
+          <div id="card_region"></div>
+          <div id="card_title"></div>
+          <div id="card_hashtag"></div>
+        </div>
       </div>
     </div>
   </div>
+</div>
 
-  <div id="lat" style="display:none">
-    {% for re in spots %}
-    {{ re.latitude}},
-    {% endfor %}
-  </div>
+<div id="lat" style="display:none">
+  {% for re in spots %}
+  {{ re.latitude}},
+  {% endfor %}
+</div>
 
-  <div id="lng" style="display:none">
-    {% for re in spots %}
-    {{ re.longitude}},
-    {% endfor %}
-  </div>
+<div id="lng" style="display:none">
+  {% for re in spots %}
+  {{ re.longitude}},
+  {% endfor %}
+</div>
 
-  <div id="name" style="display:none">
-    {% for re in spots %}
-    {{ re.title}},
-    {% endfor %}
-  </div>
+<div id="name" style="display:none">
+  {% for re in spots %}
+  {{ re.title}},
+  {% endfor %}
+</div>
 
-  <div id="hashtag" style="display:none">
-    {% for re in spots %}
-    {{ re.hashtag}},
-    {% endfor %}
-  </div>
+<div id="region" style="display:none">
+  {% for re in spots %}
+  {{ re.region}},
+  {% endfor %}
+</div>
 
-  <div id="image" style="display:none">
-    {% for re in spots %}
-    {{ re.image.url}},
-    {% endfor %}
-  </div>
+<div id="hashtag" style="display:none">
+  {% for re in spots %}
+  {{ re.hashtag}},
+  {% endfor %}
+</div>
 
-  <div id="id" style="display: none;">
-    {% for re in spots %}
-    {{ re.id}},
-    {% endfor %}
-  </div>
+<div id="image" style="display:none">
+  {% for re in spots %}
+  {{ re.image.url}},
+  {% endfor %}
+</div>
 
-  <div id="address" style="display: none;">
-    {% for re in spots %}
-    {{ re.address }},
-    {% endfor %}
-  </div>
+<div id="id" style="display: none;">
+  {% for re in spots %}
+  {{ re.id}},
+  {% endfor %}
+</div>
 
-  <div id="shortContent" style="display: none;">
-    {% for re in spots %}
-    {{ re.short_content}},
-    {% endfor %}
-  </div>
+<div id="address" style="display: none;">
+  {% for re in spots %}
+  {{ re.address }},
+  {% endfor %}
+</div>
 
-  <script type="text/javascript"
-    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7017ebc62c378fa5ebb089d1fd591804&libraries=services,clusterer,drawing"></script>
-  <script>
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-      mapOption = {
-        center: new kakao.maps.LatLng(33.3803481250219, 126.54526877357988), // 지도의 중심좌표
-        level: 10// 지도의 확대 레벨
-      };
+<div id="shortContent" style="display: none;">
+  {% for re in spots %}
+  {{ re.short_content}},
+  {% endfor %}
+</div>
 
-    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+<script type="text/javascript"
+  src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7017ebc62c378fa5ebb089d1fd591804&libraries=services,clusterer,drawing"></script>
+<script>
+  var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+    mapOption = {
+      center: new kakao.maps.LatLng(33.3803481250219, 126.54526877357988), // 지도의 중심좌표
+      level: 10// 지도의 확대 레벨
+    };
 
-    // 마커를 표시할 위치와 title 객체 배열입니다 
+  var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-    var list_lat = document.getElementById("lat").innerText.split(',');
-    var list_lng = document.getElementById("lng").innerText.split(',');
-    var list_name = document.getElementById("name").innerText.split(',');
-    var list_image = document.getElementById("image").innerText.split(',');
-    var list_hashtag = document.getElementById("hashtag").innerText.split(',');
-    var list_id_number = document.getElementById("id").innerText.split(',');
-    var list_address = document.getElementById("address").innerText.split(',');
-    var list_shortContent = document.getElementById("shortContent").innerText.split(',');
+  // 마커를 표시할 위치와 title 객체 배열입니다 
 
-    var positions = new Array();
-    var id_array = [];
-    var location_name = [];
+  var list_lat = document.getElementById("lat").innerText.split(',');
+  var list_lng = document.getElementById("lng").innerText.split(',');
+  var list_name = document.getElementById("name").innerText.split(',');
+  var list_image = document.getElementById("image").innerText.split(',');
+  var list_hashtag = document.getElementById("hashtag").innerText.split(',');
+  var list_id_number = document.getElementById("id").innerText.split(',');
+  var list_address = document.getElementById("address").innerText.split(',');
+  var list_shortContent = document.getElementById("shortContent").innerText.split(',');
+  var list_region = document.getElementById("region").innerText.split(',');
 
-    for (var i = 0; i < list_lat.length; i++) {
-      var latitude = list_lat[i];
-      var longitude = list_lng[i];
-      var number = list_id_number[i];
-      var name = list_name[i];
-      var address = list_address[i];
+  var positions = new Array();
+  var id_array = [];
+  var location_name = [];
 
-      positions.push(new kakao.maps.LatLng(latitude, longitude));
-      id_array.push(number);
-      location_name.push(name);
-    }
+  for (var i = 0; i < list_lat.length; i++) {
+    var latitude = list_lat[i];
+    var longitude = list_lng[i];
+    var number = list_id_number[i];
+    var name = list_name[i];
+    var address = list_address[i];
+    var region = list_region[i];
 
-    // 마커 이미지의 이미지 주소입니다
-    var imageSrc = "/static/images/pin.png";
+    positions.push(new kakao.maps.LatLng(latitude, longitude));
+    id_array.push(number);
+    location_name.push(name);
+  }
 
-    for (var i = 0; i < positions.length; i++) {
+  // 마커 이미지의 이미지 주소입니다
+  var imageSrc = "/static/images/pin.png";
 
-      // 마커 이미지의 이미지 크기 입니다
-      var imageSize = new kakao.maps.Size(40, 40);
+  for (var i = 0; i < positions.length; i++) {
 
-      // 마커 이미지를 생성합니다    
-      var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+    // 마커 이미지의 이미지 크기 입니다
+    var imageSize = new kakao.maps.Size(20, 25);
 
-      // 마커를 생성합니다
-      var marker = new kakao.maps.Marker({
-        map: map, // 마커를 표시할 지도
-        position: positions[i], // 마커를 표시할 위치
-        image: markerImage, // 마커 이미지 
-      });
+    // 마커 이미지를 생성합니다    
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
-      var iwContent = "<div style='height:60px; width:300px;'>" + list_id_number[i] + list_name[i] + "</br>" + list_hashtag[i] + "</div>" + "<img style='height: 300px; width:300px;' src=" + list_image[i] + ">";
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+      map: map, // 마커를 표시할 지도
+      position: positions[i], // 마커를 표시할 위치
+      image: markerImage, // 마커 이미지 
+    });
 
-      const test_title = list_name[i];
-      const test_image = list_image[i];
-      const test_content = list_shortContent[i];
-      const test_hashtag = list_hashtag[i];
-      const test_id = list_id_number[i];
-      const test_address = list_address[i];
-      const id = test_id.replace(/\s*/g, "");
+    var iwContent = "<div style='height:60px; width:300px;'>" + list_id_number[i] + list_name[i] + "</br>" + list_hashtag[i] + "</div>" + "<img style='height: 300px; width:300px;' src=" + list_image[i] + ">";
 
-      var infoWindow = new kakao.maps.InfoWindow({
-        content: iwContent
-      });
+    const test_title = list_name[i];
+    const test_image = list_image[i];
+    const test_content = list_shortContent[i];
+    const test_hashtag = list_hashtag[i];
+    const test_id = list_id_number[i];
+    const test_address = list_address[i];
+    const id = test_id.replace(/\s*/g, "");
+    const test_region = list_region[i];
 
-      (function (marker, infoWindow) {
-        // kakao.maps.event.addListener(marker, 'mouseover', function () {
-        //   infoWindow.open(map, marker);
-        // })
-        // kakao.maps.event.addListener(marker, 'mouseout', function () {
-        //   infoWindow.close();
-        // })
+    var infoWindow = new kakao.maps.InfoWindow({
+      content: iwContent
+    });
 
-        kakao.maps.event.addListener(marker, 'click', function () {
-          //console.log(marker);
-          document.getElementById('card_title').innerHTML = test_title;
-          document.getElementById('image_test').src = test_image;
-          document.getElementById('card_content').innerHTML = test_content;
-          document.getElementById('card_hashtag').innerHTML = test_hashtag;
-          document.getElementById('card_address').innerHTML = test_address;
-          document.getElementById('btn_a').href = '/travels/spots/' + id + '/';
-          document.getElementById('card_hover_text').innerHTML = '사진을 클릭해보세요! :)'
-        })
-      })(marker, infoWindow);
+    (function (marker, infoWindow) {
+      // kakao.maps.event.addListener(marker, 'mouseover', function () {
+      //   infoWindow.open(map, marker);
+      // })
+      // kakao.maps.event.addListener(marker, 'mouseout', function () {
+      //   infoWindow.close();
+      // })
 
-      marker.setMap(map);
-    }
+      kakao.maps.event.addListener(marker, 'click', function () {
+        //console.log(marker);
+        document.getElementById('card_title').innerHTML = test_title;
+        document.getElementById('card_title').src = '/media/travels/cheveron.png';
+        document.getElementById('image_test').src = test_image;
+        document.getElementById('card_hashtag').innerHTML = test_hashtag;
+        document.getElementById('btn_a').href = '/travels/spots/' + id + '/';
+        document.getElementById('card_region').innerHTML = test_region;
+      })
+    })(marker, infoWindow);
 
-  </script>
+    marker.setMap(map);
+  }
+
+</script>
 </div>
 {% endblock %}
