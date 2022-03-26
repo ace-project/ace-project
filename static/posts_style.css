@@ -1,0 +1,131 @@
+/* nav바에 해당 메뉴 색 변경 */
+#menu3{
+    color: var(--main-color1); 
+}
+
+
+h1 {
+    color: gray;
+}
+
+.posts-page{
+   background-color: var(--background-color);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+ }
+ 
+
+.posts-top-bar{
+
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between ;
+   align-items: center;
+   width: 1188px;
+   padding: 15px;
+   position: sticky;
+   top: 75px;
+   z-index: 11;
+   height: 70px;
+   background-color: var(--background-color);
+   padding-top: 25px;
+   padding-bottom: 25px;
+  }
+  
+.posts-button{
+   display: flex;
+   flex-direction: row;
+   height: 37.97px;
+   width: 400px;
+
+}
+
+#posts-b1{
+   width: 100px;
+   margin-left: 3px;
+   background-color: var(--main-color1);
+   border: none;
+}
+
+
+
+#posts-b2{
+   background-color: var(--main-color1);
+   border: none;
+
+}
+
+.posts_list{
+   width: 1188px;
+   display: flex;
+   justify-content: space-around;
+ 
+   padding: 15px
+ }
+}
+
+
+
+
+
+
+/* 상백 */
+/* 전체 */
+
+ /* 글쓰기 및 검색창  */
+
+
+/* 게시판 */
+#table_container {
+   width: 100%;
+   font-size: 15px;
+}
+
+ 
+ /* 게시판 윗줄 */
+ .posts_head {
+    font-weight: 700;
+ }
+
+
+/* 게시판 제목 */
+#posts_title {
+   width: 600px;
+}
+
+  
+  
+ /* 디테일 페이지 a element */
+ #post_detail_a {
+    text-decoration: none;
+    color: black;
+ }
+  
+  
+ #post_detail_a:hover {
+    color: gray;
+ }
+ 
+
+
+ /* paginator div */
+ #paginator_container {
+    display: flex;
+    justify-content: center;   
+    margin-top: 30px;
+ }
+
+
+
+/* paginator 버튼 */
+.pagination > li > a {
+   background-color: white;
+   color: #141414;
+}
+
+.pagination > .page-item.active > a {
+   background-color: #EA6A6B;
+   border: solid 1px #EA6A6B;
+}
+
