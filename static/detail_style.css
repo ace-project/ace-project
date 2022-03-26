@@ -1,0 +1,175 @@
+.post-page{
+   background-color: var(--background-color);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+ }
+ 
+.detail_container {
+   width: 1158px;
+   margin-top: 40px;
+
+}
+ 
+ /* 게시판 제목 div */
+ .title_container {
+   width: 1158px;
+   border-bottom: 3px solid #e5e5e5;
+   padding-top: 20px;
+   padding-left: 15px;
+   padding-bottom: 10px;
+  
+}
+ 
+
+ 
+/* 게시판 제목 */
+#detail_title {
+   font-size: 20px;
+   font-weight: 700;
+}
+ 
+ /* 유저 정보 div */
+ .user_info_container {
+   margin-top: 20px;
+
+}
+ 
+ 
+/* 유저 정보 */
+.user_info {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   list-style: none;
+   padding-left: 0px;
+   margin: 0px;
+}
+
+.user_info_li_1, .user_info_li_2{
+   margin: 0px;
+   margin-left: 10px;
+   margin-right: 10px;
+
+   font-weight: 700;
+}
+
+#user_info_title{
+   color: var(--shade1);
+   margin: 0px;
+   margin-right: 5px;
+}
+.edit_buttons{
+   width: 1158px;
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-end;
+}
+ /* 글 수정 버튼 */
+ #edit_button {
+   background-color: var(--shade2);
+   margin-left: 5px;
+   color: white;
+}
+
+#edit_button:hover{
+   background-color: var(--shade1);
+
+}
+
+.post_body{
+   width: 1158px;
+   height: 300px;
+   padding: 20px;
+   margin-top: 30px;
+   margin-bottom: 30px;
+   background-color: var(--shade4);
+
+}
+
+
+ /* 댓글창 */
+ #comment_info {
+   margin-top: 30px;
+   width: 1158px;
+   padding: 0;
+   
+   height: fit-content;
+}
+ 
+.comment_form {
+   display: flex;
+   flex-direction: column;
+}
+ 
+
+
+.comment_container{
+   margin: 0px;
+   padding: 0px;
+}
+
+#comment_button{
+
+   border: none;
+   margin-top: 10px;
+}
+
+
+
+
+
+
+  
+ /* 게시판 due */
+ #detail_due {
+    font-size: 18px;
+ }
+
+
+ /* 게시판 포토스팟 */
+ #detail_photospot {
+    font-size: 18px;
+ }
+  
+  
+
+  
+
+  
+
+  
+ .post_comment {
+    padding-top: 20px;
+ }
+
+
+/* 댓글 삭제 버튼 */
+#comment_delete {
+   background: none;
+   background-color: #EBEBEB;
+   border: 1px solid #EBEBEB;
+   padding: 3px;
+   border-radius: 5px;
+}
+
+
+/* 비밀댓글 체크 버튼 */
+#secret_check {
+   display: flex;
+   justify-content: right;
+   padding: 5px;
+}
+
+#secret_checkbox {
+   margin-right: 5px;
+   margin-top: 5px;
+}
+
+
+/* 비밀 표시 부분 */
+#secret_index {
+   color: #EA6A6B;
+   font-weight: 700;
+}
+

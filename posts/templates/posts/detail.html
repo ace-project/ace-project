@@ -1,84 +1,91 @@
 {% extends 'base.html' %}
 {% load static %}
- 
-{% block style %}
-<link rel="stylesheet" href="{% static 'posts/detail_style.css' %}">
-{% endblock %}
- 
-{% block content %}
-<div class="col-lg-12 col-md-12 col-sm-12" id="detail_container">
-   {% if post %}
-   <!-- 게시글 제목 -->
-   <div class="title_container">
-       <h1 id="detail_title">{{ post.title }}</h1>
-       <!-- <h2 id="detail_due">Due : {{ post.due|date:'Y-m-d' }}</h2>
-       <h2 id="detail_photospot">포토스팟 : {{ post.location }}</h2> -->
-   </div>
-   <!-- 게시글 유저와 생성일 -->
-   <div class="user_info_container">
-       <ul class="user_info">
-           <li class="user_info_li_1">{{ post.user }}</li>
-           <li class="user_info_li_2">{{ post.created_at|date:'Y-m-d H:i:s' }}</li>
-       </ul>
-   </div>
-   <!-- 게시글 내용 -->
-   <div>
-       <p>{{ post.body }}</p>
-   </div>   
 
-       <!-- 수정과 삭제 버튼 -->
-       {% if user == post.user.user %}
-       <div style="margin-top: 100px;">
-            <button type="button" id="edit_button" class="btn" onclick=location.href="{% url 'posts:edit' post.id %}">수정</button>
-            <button type="button" id="edit_button" class="btn" onclick=location.href="{% url 'posts:delete' post.id %}">삭제</button>
-       </div>
-       {% endif %}
-   {% endif %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'detail_style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="post-page">
+    <div class="detail_container">
+        {% if post %}
+        <!-- 게시글 제목 -->
+        <div class="title_container">
+            <h1 id="detail_title">{{ post.title }}</h1>
+            <!-- <h2 id="detail_due">Due : {{ post.due|date:'Y-m-d' }}</h2>
+       <h2 id="detail_photospot">포토스팟 : {{ post.location }}</h2> -->
+        </div>
+        <!-- 게시글 유저와 생성일 -->
+        <div class="user_info_container">
+            <ul class="user_info">
+                <li class="user_info_li_1"><span id="user_info_title">작성자 </span> {{ post.user }}</li>
+                <li class="user_info_li_2"><span id="user_info_title">작성일</span> {{ post.created_at|date:'Y-m-d H:i:s'}}</li>
+            </ul>
+        </div>
+
+        <!-- 게시글 내용 -->
+        <div class="post_body">
+            <p>{{ post.body }}</p>
+        </div>
+
+        <!-- 수정과 삭제 버튼 -->
+
+        {% endif %}
+        {% if user == post.user.user %}
+        <div class="edit_buttons">
+            <div><button type="button" id="edit_button" class="btn"
+                    onclick=location.href="{% url 'posts:edit' post.id %}">수정</button></div>
+            <div><button type="button" id="edit_button" class="btn"
+                    onclick=location.href="{% url 'posts:delete' post.id %}">삭제</button></div>
+        </div>
+        {% endif %}
+    </div>
+
+
+    <!-- 댓글 생성 및 보여주기 -->
+    <div class="row" id="comment_info">
+        <div class="comment_container">
+            <form class="comment_form" method="POST" action="{% url 'posts:comment' post.id %}">
+                {% csrf_token %}
+                <label id="secret_check"><input id="secret_checkbox" type="checkbox" name="secret_comment"
+                        value="True">작성자에게 귓속말하기</label>
+                <textarea name="content" id="" cols="50" rows="5" placeholder="댓글을 남겨주세요"></textarea>
+                <button class="btn btn-secondary" id="comment_button" type="submit">댓글 달기</button>
+            </form>
+        </div>
+
+        <!-- 댓글 표시 -->
+        <div class="post_comment">
+            {% for comment in post.post_comments.all %}
+            <!-- 비밀댓글 체크 X -->
+            {% if comment.secret == False %}
+            <p>{{ comment.author }} <span>{{ comment.created_at|date:'Y-m-d H:i:s' }}</span></p>
+            <p>{{ comment.content }}</p>
+            <!-- 글 작성자라면 -->
+            {% elif comment.secret == True and user == post.user.user %}
+            <p>{{ comment.author }} <span>{{ comment.created_at|date:'Y-m-d H:i:s' }}</span></p>
+            <p>{{ comment.content }}</p>
+            <!-- 댓글 작성자라면 -->
+            {% elif comment.secret == True and user == comment.author.user %}
+            <p>{{ comment.author }} <span>{{ comment.created_at|date:'Y-m-d H:i:s' }}</span></p>
+            <p>{{ comment.content }}</p>
+            <!-- 비밀댓글 체크 O -->
+            {% elif comment.secret == True %}
+            <p id="secret_index">(귓속말)</p>
+            <p>{{ comment.author }} <span>{{ comment.created_at|date:'Y-m-d H:i:s' }}</span></p>
+            <p style="color: #A29F9F; font-weight: 500;">작성자에게만 보이는 댓글입니다.</p>
+            {% endif %}
+            <!-- 댓글 삭제 버튼 -->
+            {% if user == comment.author.user %}
+            <a href="{% url 'posts:comment_delete' post.id comment.id %}"><button id="comment_delete" type="submit"
+                    name="delete">삭제</button></a>
+            {% endif %}
+            <hr>
+            {% endfor %}
+        </div>
+    </div>
 </div>
- 
- 
-<!-- 댓글 생성 및 보여주기 -->
-<div class="row" id="comment_info">
-   <div class="comment_container">
-       <form class="comment_form" method="POST" action="{% url 'posts:comment' post.id %}">
-           {% csrf_token %}
-           <label id="secret_check"><input id="secret_checkbox" type="checkbox" name="secret_comment" value="True">비밀댓글 체크</label>
-           <textarea name="content" id="" cols="150" rows="5" placeholder="함께 사진을 찍어보세요!"></textarea>
-           <button type="submit">댓글 달기</button>
-       </form>
-   </div>
- 
-   <!-- 댓글 표시 -->
-   <div class="post_comment">
-       {% for comment in post.post_comments.all %}  
-        <!-- 비밀댓글 체크 X -->
-        {% if comment.secret == False %}
-            <p>{{ comment.author }} <span>{{ comment.created_at|date:'Y-m-d H:i:s' }}</span></p>
-            <p>{{ comment.content }}</p> 
-        <!-- 글 작성자라면 -->
-        {% elif comment.secret == True and user == post.user.user %}
-            <p>{{ comment.author }} <span>{{ comment.created_at|date:'Y-m-d H:i:s' }}</span></p>
-            <p>{{ comment.content }}</p> 
-        <!-- 댓글 작성자라면 -->
-        {% elif comment.secret == True and user == comment.author.user %}
-            <p>{{ comment.author }} <span>{{ comment.created_at|date:'Y-m-d H:i:s' }}</span></p>
-            <p>{{ comment.content }}</p> 
-        <!-- 비밀댓글 체크 O -->
-        {% elif comment.secret == True %}
-            <p id="secret_index">(비밀)</p>
-            <p>{{ comment.author }} <span>{{ comment.created_at|date:'Y-m-d H:i:s' }}</span></p>
-            <p style="color: #A29F9F; font-weight: 500;">비밀댓글 입니다.</p>     
-        {% endif %}    
-           <!-- 댓글 삭제 버튼 -->
-           {% if user == comment.author.user %}
-                <a href="{% url 'posts:comment_delete' post.id comment.id %}"><button id="comment_delete" type="submit" name="delete">삭제</button></a>
-           {% endif %}
-           <hr>
-       {% endfor %}   
-   </div>
-</div>
- 
- 
- 
- 
+
+
+
 {% endblock %}
