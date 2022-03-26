@@ -101,6 +101,13 @@
 }
 
 
+/* 비밀 표시 부분 */
+#secret_index {
+   color: #EA6A6B;
+   font-weight: 700;
+}
+
+
  /* 글 수정 버튼 */
  #edit_button {
     background-color: #EBEBEB;

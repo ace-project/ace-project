@@ -65,6 +65,7 @@
             <p>{{ comment.content }}</p> 
         <!-- 비밀댓글 체크 O -->
         {% elif comment.secret == True %}
+            <p id="secret_index">(비밀)</p>
             <p>{{ comment.author }} <span>{{ comment.created_at|date:'Y-m-d H:i:s' }}</span></p>
             <p style="color: #A29F9F; font-weight: 500;">비밀댓글 입니다.</p>     
         {% endif %}    
