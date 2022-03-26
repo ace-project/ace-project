@@ -1,16 +1,16 @@
 /* nav바에 해당 메뉴 색 변경 */
-#menu2{
-  color: var(--main-color1); 
+#menu2 {
+  color: var(--main-color1);
 }
 
-.map-page{
+.map-page {
   background-color: var(--background-color);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.map-like-filter{
+.map-like-filter {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -24,17 +24,16 @@
   background-color: var(--background-color);
   padding-top: 25px;
   padding-bottom: 25px;
-  
 }
 
-.map-like-filter-form{
+.map-like-filter-form {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-#map-login{
+#map-login {
   color: var(--shade1);
   font-weight: 700;
 }
@@ -48,8 +47,7 @@
   width: 1188px;
   display: flex;
   justify-content: space-around;
-
-  padding: 15px
+  padding: 15px;
 }
 
 #map-filter-button {
@@ -58,24 +56,20 @@
   background-color: var(--main-color1);
   border: none;
   margin-left: 20px;
-
 }
 
-#map-filter-title{
+#map-filter-title {
   margin: 0px;
   margin-left: 10px;
   margin-right: 10px;
   font-weight: 700;
   color: var(--shade1);
-
-
 }
-#map-filter-title:hover{
+#map-filter-title:hover {
   color: var(--main-color1);
-
 }
 
-.map-filter-label{
+.map-filter-label {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -83,75 +77,88 @@
   margin-left: 10px;
 }
 
-
-#selected{
+#selected {
   width: 20px;
   height: 20px;
   vertical-align: middle;
   color: currentColor;
   accent-color: var(--main-color1);
-
 }
 
-.map-container{
+.map-container {
   width: 1188px;
-  height: calc(100vh - 145px); 
+  height: calc(100vh - 145px);
   display: flex;
   justify-content: space-between;
-
-  padding: 15px
+  padding-top: 20px;
 }
 
 /* 용호 */
 
-
-
 #card {
   display: flex;
   flex-direction: column;
-
   width: 350px;
-
-
+  height: 500px;
+  background-color: #e9eef1;
+  border-radius: 10%;
+  /* border-radius: 10%; */
 }
 
-
-
 #card_image {
-  object-fit: contain;
   width: 350px;
   height: 350px;
   object-fit: cover;
-  border-radius: 10%;
+  /* border-radius: 10%; */
+}
+
+#card_hover_text {
+  display: table;
+  position: absolute;
+  z-index: 2;
+  width: 267px;
+  height: 267px;
+  color: var(--text-highlight);
+  text-align: center;
+  border-radius: 5%;
+}
+
+#card_hover_text p {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+#card_hover_text:hover {
+  opacity: 1;
 }
 
 #image_test {
   width: 350px;
   height: 350px;
-  border-radius: 10%;
+  border-radius: 10% 10% 0 0;
+  /* border-radius: 10%; */
 }
 
 #card_title {
   text-align: center;
-  margin-top: 25px;
+  margin-top: 20px;
   margin-bottom: 15px;
-  font-size: 40px;
+  font-size: 25px;
   font-weight: 700;
-  color: rgb(56, 56, 56)
+  color: rgb(56, 56, 56);
 }
-#card-text{
+#card-text {
   color: var(--shade1);
   font-size: 18px;
-
-  
 }
 
-#card_info{
+#card_info {
   height: 100%;
   display: flex;
   flex-direction: column;
-
-
   /* background-color: var(--text-color); */
   border-radius: 10%;
   /* margin-top: 10px; */
@@ -159,32 +166,28 @@
 }
 
 #card_content {
-  font-size: 18px;
-
+  font-size: 16px;
   text-align: center;
   color: var(--shade1);
   font-weight: 700;
 }
 
-#card_address{
-  font-size: 18px;
+#card_address {
+  font-size: 16px;
 
   text-align: center;
-  color: var(--main-color1  );
+  color: var(--main-color1);
   font-weight: 700;
   margin-top: 20px;
-
 }
 
 #card_hashtag {
-  font-size: 18px;
+  font-size: 16px;
 
   text-align: center;
   color: var(--shade1);
   font-weight: 700;
-
 }
-
 
 #card_button {
   text-align: center;
@@ -219,7 +222,6 @@
   margin-left: -89px;
   text-align: center;
 }
-
 
 a#btn_a {
   color: rgba(30, 22, 54, 0.6);

@@ -24,19 +24,23 @@
         </form>
 
       {% else %}
-        <div><a id="map-login" href="{% url 'accounts:login' %}">로그인하고 좋아하는 스팟만 모아보세요!</a></div>
+        <div>
+          <a id="map-login" href="{% url 'accounts:login' %}">로그인하고 좋아하는 스팟만 모아보세요!</a>
+        </div>
       {%endif%}
     
   </div>
 
-
   <div class="map-container">
 
-    <div id="map" style="width:790px; border-radius: 5%;"></div>
+    <div id="map" style="width:790px; height:500px; border-radius: 5%;"></div>
 
     <div id="card">
       <div id="card_image">
-        <a id="btn_a" href="/travels/map/"><img id="image_test" src="/media/travels/default.png" alt="default_image"></a>
+        <a id="btn_a" href="/travels/map/">
+          <div id="card_hover_text"><p></p></div>
+          <img id="image_test" src="/media/travels/default_image.jpg" alt="default_image">
+        </a>
       </div>
       <div id="card_title"><p id="card-text">지도 위의 스팟을 클릭해보세요! :)</p></div>
       
@@ -183,6 +187,7 @@
           document.getElementById('card_hashtag').innerHTML = test_hashtag;
           document.getElementById('card_address').innerHTML = test_address;
           document.getElementById('btn_a').href = '/travels/spots/' + id + '/';
+          document.getElementById('card_hover_text').innerHTML = '사진을 클릭해보세요! :)'
         })
       })(marker, infoWindow);
 
