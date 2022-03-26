@@ -99,7 +99,7 @@
   display: flex;
   flex-direction: column;
   width: 350px;
-  height: 500px;
+  height: 100%;
   background-color: #e9eef1;
   border-radius: 10%;
   /* border-radius: 10%; */
@@ -144,10 +144,11 @@
 
 #card_title {
   text-align: center;
-  margin-top: 20px;
-  margin-bottom: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   font-size: 25px;
   font-weight: 700;
+  height: 37px;
   color: rgb(56, 56, 56);
 }
 #card-text {
@@ -156,7 +157,7 @@
 }
 
 #card_info {
-  height: 100%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   /* background-color: var(--text-color); */
@@ -172,13 +173,20 @@
   font-weight: 700;
 }
 
+#card_info-container{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 #card_address {
   font-size: 16px;
 
   text-align: center;
   color: var(--main-color1);
   font-weight: 700;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 #card_hashtag {
