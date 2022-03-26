@@ -24,13 +24,15 @@
    <!-- 게시글 내용 -->
    <div>
        <p>{{ post.body }}</p>
+   </div>   
 
        <!-- 수정과 삭제 버튼 -->
+       {% if user == post.user.user %}
        <div style="margin-top: 100px;">
             <button type="button" id="edit_button" class="btn" onclick=location.href="{% url 'posts:edit' post.id %}">수정</button>
             <button type="button" id="edit_button" class="btn" onclick=location.href="{% url 'posts:delete' post.id %}">삭제</button>
        </div>
-   </div>
+       {% endif %}
    {% endif %}
 </div>
  
