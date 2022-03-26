@@ -19,7 +19,7 @@ def index(request):
    
 
    # 페이지네이터 코드
-   paginator = Paginator(posts, 5)
+   paginator = Paginator(posts, 10)
    page = request.GET.get('page')
    posts = paginator.get_page(page)
 
