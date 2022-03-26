@@ -63,11 +63,38 @@ h1 {
  
    padding: 15px
  }
+
+.posts_head {
+   font-weight: 700;
+   color: var(--shade1);
 }
 
 
+@font-face {
+   font-family: 'SEBANG_Gothic_Bold';
+   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SEBANG_Gothic_Bold.woff') format('woff');
+   font-weight: normal;
+   font-style: normal;
+ }
 
+.posts_text1{
+   font-family: var(--highlight-font);
+   color: var(--shade1);
+   font-size: 25px;
+   height: 35px;
+}
 
+.posts_text2{
+   font-family: var(--highlight-font);
+   color: var(--main-color1);
+}
+
+.posts_list{
+   height: calc(100vh - 185px); 
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+}
 
 
 /* 상백 */
