@@ -1,3 +1,7 @@
+* {
+  /* font-family: "Poppins", sans-serif; */
+}
+
 */ #mypage_container {
   display: flex;
   color: #141414;
@@ -36,16 +40,19 @@ a {
 .user_links {
   list-style-type: none;
   text-align: center;
+  margin-right: 15px;
+  color: #ebebeb;
 }
 
 .user_link {
   font-size: 19px;
   font-weight: bolder;
-  padding: 12px 0px;
+  padding: 10px 0px;
+  margin-left: 15px;
 }
 
 .user_link a {
-  color: white;
+  color: #ebebeb;
   text-decoration: none;
   display: flex;
   flex-direction: row;
@@ -60,8 +67,14 @@ a {
   color: #ebebeb;
 }
 
+.user_link i:hover {
+  color: #2d3234;
+}
+
 .user_icons {
   list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 .user_icons a {
@@ -70,6 +83,7 @@ a {
   /* display: flex;
   flex-direction: row; */
   margin: 5px;
+  margin-left: 0;
 }
 
 .user_icons i {
@@ -124,16 +138,18 @@ a {
 .wishlist_liked {
   font-size: 25px;
   font-weight: bolder;
-  font-weight: bolder;
   margin-bottom: 20px;
   color: #141414;
   text-align: left;
+  margin-left: 15px;
 }
 
 .user_info {
   font-size: 19px;
   font-weight: bolder;
-  padding: 12px 0px;
+  align-items: center;
+  padding: 5px 0px;
+  color: #ebebeb;
 }
 
 .mypage_page {
@@ -154,7 +170,7 @@ a {
 } */
 
 .user_name {
-  font-size: 30px;
+  font-size: 35px;
   text-align: center;
   font-weight: bolder;
   color: #141414;
