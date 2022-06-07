@@ -42,7 +42,7 @@
 <br>
 
 ## 3. ERD 설계
-![Untitled Diagram-Page-2](https://user-images.githubusercontent.com/95380638/158016517-a66ea04a-97ca-46b2-832c-ad502ed4d7be.png)
+![spoton (2)](https://user-images.githubusercontent.com/95380638/172393083-1102f895-8508-440c-b9b8-d397c4ec8b49.png)
 
 - User 모델과 Profile 모델은 1:1관계 설정 - Profile 모델로 다양한 사용자 데이터를 받기 위해 설정
 - User 모델과 Travel 모델은 M:N관계 설정 - 1명의 유저가 여러 개의 여행 스팟에 좋아요를 누를 수 있고, 1개의 여행 스팟은 여러 명의 유저에게 좋아요를 받을 수 있기 때문
