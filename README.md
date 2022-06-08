@@ -39,6 +39,10 @@
 - Git
 - Github
 
+**배포**
+- AWS Route 53
+- Nginx
+
 <br>
 
 ## 3. ERD 설계
